@@ -2,9 +2,9 @@ package unplugged
 
 class Usuario {
 
-	def nombre
-	def contrasenia
-	def nombreUsuario
+	def String nombre
+	def String password
+	def String nombreUsuario
 	
 	static hasMany = [videos: Video, comentarios: Comentario]
 	

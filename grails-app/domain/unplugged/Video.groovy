@@ -3,9 +3,10 @@ package unplugged
 class Video {
 	
 	def Date fecha
-	def lugar
-	def titulo
-	def ofrecidoPor
+	def String lugar
+	def String titulo
+	def String ofrecidoPor
+	def String path
 	
 	def Usuario uploader
 	

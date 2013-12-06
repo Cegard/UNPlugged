@@ -3,17 +3,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="layout" content="main"/>
-<title>UNPlugged</title>
+<title>Streaming</title>
 </head>
 <body>
 	<h1>Streaming</h1>
-    <form>
-        Titulo: <input type="text" name="titulo"><br>
-        Fecha: <input type="date" name="fecha"><br>
-        Lugar: <input type="text" name="lugar"><br>
-        Direccion: <input type="text" name="direccion"><br>
-        Ofrecido por: <input type="text" name="ofrecidoPor"><br><br>
-        <input type="submit" value="Iniciar">
-	</form>
+	<g:form name="autentication" controller="VideoController">
+        Titulo: <g:textField name="titulo"/> <br>
+        <%-- Fecha: <g:datePicker name="fecha" default="${new Date()}" precision="day" /> <br/> --%>
+        Lugar: <g:textField name="lugar"/> <br>
+        Temas relacionados: <g:textField name="temas" /> <br/>
+        Ofrecido por: <g:textField name="ofrecidoPor" /> <br>
+        <br>  
+        <g:actionSubmit value="Iniciar transmición" action="submit"/>
+	</g:form>
 </body>
 </html>

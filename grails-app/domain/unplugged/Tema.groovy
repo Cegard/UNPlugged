@@ -2,7 +2,7 @@ package unplugged
 
 class Tema {
 	
-	def nombre
+	def String nombre
 	
     static constraints = {
     }

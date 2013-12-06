@@ -2,7 +2,7 @@ package unplugged
 
 class ClaseEvento {
 	
-	def nombre
+	def String nombre
 	
     static constraints = {
     }
