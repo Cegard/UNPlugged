@@ -7,7 +7,7 @@ class UsuarioController {
 	}
 	
 	
-    def login = {
+        def login = {
 		
 	}
 	
@@ -20,13 +20,24 @@ class UsuarioController {
 			
 			session.user = user
 			flash.message = "Bienvenido ${user.nombre}"
-			redirect(url:"/video/iniciarStreaming")
+			redirect(action:"login3")
 		}
 		else{
 			flash.message = "usuario ${params.nombre} no se encuentra registrado"
-			redirect(action:"login")
+			redirect(action:"login4")
 		}
 		
 	}
+        def logout={
+            session.user=null
+            redirect(action:"login2")
+            
+        }
+        def login4={
+            
+        }
+        def login3={
+            
+        }
 	
 }
