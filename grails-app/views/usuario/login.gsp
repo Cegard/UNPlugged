@@ -7,7 +7,7 @@
 </head>
 
 <body>
-	<h1>Ingreso a la aplicaci&oacuten</h1> <br/>
+	<h1>Iniciar Sesi&oacuten</h1> <br/>
 	<g:form name="autentication" action="authenticate">
 	
 		Nombre <g:textField name="nombre"/><br/>
