@@ -21,7 +21,6 @@ body,td,th {
 
 <body>
     <p style="color: #FFF; font-size: 24px;"> <strong>|| Bienvenido </strong></p>
-    <g:session.user.name>
     <g:form name="LoginOut" action="logout">
 	<g:submitButton name="logOutButtom" value="Cerrar sesion" />
     </g:form>
