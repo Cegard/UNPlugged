@@ -21,12 +21,12 @@
 
 <body>
     <p style="color: #FFF; font-size: 24px;"><strong>|| Inicio</strong></p>
-    <g:form name="autentication" action="authenticate">
-        Nombre <br> <g:textField name="nombre"/><br/>
-        Contrase&ntildea <br> <g:passwordField name="password"/><br/>
-        <p style="color: red">Nombre de usuario o contraseña invalida</p><br>
-	<g:submitButton name="login" value="Entrar" />
-    </g:form>
+    <form name="autentication" action="authenticate">
+        Nombre <br/><input type="text" id="nombre" name="nombre"/><br/>
+        Contrase&ntildea<br/> <input type="password" id="password" name="password"/><br/>
+        <p style="color: red">Nombre de usuario o contraseña invalida</p><br/>
+	<input type="submit" name="login" value="Entrar" />
+    </form>
 </body>
 </html>
 

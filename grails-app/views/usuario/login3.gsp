@@ -20,9 +20,9 @@ body,td,th {
 </head>
 
 <body>
-    <p style="color: #FFF; font-size: 24px;"> <strong>|| Bienvenido </strong></p>
-    <g:form name="LoginOut" action="logout">
-	<g:submitButton name="logOutButtom" value="Cerrar sesion" />
-    </g:form>
+    <p style="color: #FFF; font-size: 24px;"> <strong>|| Bienvenido <%= "${session.actual.nombre}" %> </strong></p>
+    <form name="LogOut" action="logout">
+	<input type="submit" name="logOutButtom" value="Cerrar sesion" />
+    </form>
 </body>
 </html>

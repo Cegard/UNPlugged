@@ -1,8 +1,7 @@
 package unplugged
 
 class UsuarioController {
-	
-	Usuario actual
+
         def index={
 		redirect(action:"login2")
 	}
@@ -19,9 +18,9 @@ class UsuarioController {
 		
 		if (user){
 			
-			actual = user
+			session.actual = user
 			flash.message = "Bienvenido ${user.nombre}"
-			redirect(url:"/usuario/login3")
+			redirect(action:"login3")
 		}
 		else{
 			flash.message = "usuario ${params.nombre} no se encuentra registrado"
@@ -29,16 +28,19 @@ class UsuarioController {
 		}
 		
 	}
-        def logout={
-            session.user=null
-            redirect(action:"login2")
-            
-        }
-        def login4={
-            
-        }
-        def login3={
-            
-        }
+	
+    def logout={
+        session.user=null
+        redirect(action:"login2")
+        
+    }
+	
+    def login4={
+        
+    }
+	
+    def login3={
+        
+    }
 	
 }

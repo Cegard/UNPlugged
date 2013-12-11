@@ -21,11 +21,11 @@ body,td,th {
 
 <body>
     <p style="color: #FFF; font-size: 24px;"><strong>|| Inicio</strong></p>
-    <g:form name="autentication" action="authenticate">
-        Nombre <br> <g:textField name="nombre"/><br/>
-        Contrase&ntildea <br> <g:passwordField name="password"/><br/>
+    <form name="autentication" action="authenticate">
+        Nombre <input id="nombre" type="text" required="required" name="nombre"/> <br/>
+        Contrase&ntildea <input id="pass" type="password" required="required" name="password"/> <br/>
 	<br/>
-	<g:submitButton name="login" value="Entrar" />
-    </g:form>
+	<input type="submit" name="login" value="Entrar" />
+    </form>
 </body>
 </html>
