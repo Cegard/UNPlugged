@@ -2,7 +2,11 @@ package unplugged
 
 class Rol {
 	
-	def String tipo
+	def enum tipo{
+		def String estudiante = "estudiante"
+		def String profesor = "profesor"
+		def String encargado = "encargado"
+	}
 	
 	def Usuario persona
 	def ClaseEvento claseEvento

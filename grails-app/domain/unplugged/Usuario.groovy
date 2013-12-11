@@ -11,4 +11,8 @@ class Usuario {
     static constraints = {
 		nombreUsuario unique: true
     }
+	
+	def String toString(){
+		"${this.nombre}"
+	}
 }
