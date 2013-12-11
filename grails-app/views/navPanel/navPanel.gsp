@@ -19,7 +19,7 @@ a:link {
 
 <body>
 <p style="font-size: 24px; font-weight: bolder;">|| Explorar</p>
-<p><a href="#">Cursos</a></p>
+<p><a href="canales.gsp" target="FramePrincipal">Cursos</a></p>
 <p><a href="#">Videos</a></p>
 <p><a href="#">Canales</a></p>
 </body>

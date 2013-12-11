@@ -21,5 +21,9 @@ class FrameController {
         
     }
 	
+	def canales={
+		
+	}
+	
 }
 

@@ -12,11 +12,16 @@ package unplugged
  */
 class NavPanelController {
     def index={
-        redirect(action: navPanel)
+        redirect(action: "navPanel")
     }
     def navPanel={
         
     }
-	
+	def canales={
+		
+	}
+	def frame1={
+		
+	}
 }
 
