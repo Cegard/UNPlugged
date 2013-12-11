@@ -54,10 +54,14 @@ class UsuarioController {
 	
 	def procesarRol={
 		
-		def Rol rol = Rol.findByPersona.id()
-		
-		if (Rol.findByPersona.id(session.actual.id).rol){
+		if (session.rol.rol.equals("encargado") || session.rol.rol.equals("profesor") || 
+			session.rol.rol.equals("monitor")){
 			
+			redirect(url:"/video/iniciarStreaming")
+		}else if(session.rol.rol.equals("estudiante")){
+			redirect(url:"/video/verStreaming")
+		}else{
+			redirect(action:"login2")
 		}
 	}
 	

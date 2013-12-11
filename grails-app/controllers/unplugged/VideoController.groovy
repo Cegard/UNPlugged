@@ -5,4 +5,8 @@ class VideoController {
     def iniciarStreaming = {
 		
 	}
+	
+	def verStreaming = {
+		
+	}
 }
