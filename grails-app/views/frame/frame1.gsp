@@ -24,6 +24,7 @@ body {
 <p>&nbsp;
 	<div align="center">
 		<img src="${resource(dir: 'images', file: 'video.png')}" width="436" height="425" alt="Grails"/>
+		<input type="button" formaction="Ususuario">
 	</div>
 </p>
 </body>

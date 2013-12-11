@@ -19,6 +19,15 @@ class UsuarioController {
 		if (user){
 			
 			session.actual = user
+			def Rol r
+			
+			Rol.list().each{
+				if(it.persona.id == user.id){
+					r = it
+				}
+			}
+			
+			session.rol = r
 			flash.message = "Bienvenido ${user.nombre}"
 			redirect(action:"login3")
 		}
@@ -30,7 +39,7 @@ class UsuarioController {
 	}
 	
     def logout={
-        session.user=null
+        session.actual=null
         redirect(action:"login2")
         
     }
@@ -42,5 +51,14 @@ class UsuarioController {
     def login3={
         
     }
+	
+	def procesarRol={
+		
+		def Rol rol = Rol.findByPersona.id()
+		
+		if (Rol.findByPersona.id(session.actual.id).rol){
+			
+		}
+	}
 	
 }

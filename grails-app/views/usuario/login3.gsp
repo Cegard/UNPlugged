@@ -20,7 +20,7 @@ body,td,th {
 </head>
 
 <body>
-    <p style="color: #FFF; font-size: 24px;"> <strong>|| Bienvenido <%= "${session.actual.toString()}" %> </strong></p>
+    <p style="color: #FFF; font-size: 24px;"> <strong>|| Bienvenido <%= "${session.rol.rol} ${session.actual.toString()}" %> </strong></p>
     <form name="LogOut" action="logout">
 	<input type="submit" name="logOutButtom" value="Cerrar sesion" />
     </form>

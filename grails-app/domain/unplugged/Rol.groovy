@@ -2,13 +2,7 @@ package unplugged
 
 class Rol {
 	
-	def enum Tipo{
-		estudiante("estudiante"),
-		profesor("profesor"),
-		encargado("encargado")
-	}
-	
-	def Tipo rol
+	def String rol
 	
 	def Usuario persona
 	def ClaseEvento claseEvento
@@ -17,4 +11,8 @@ class Rol {
 	
     static constraints = {
     }
+	
+	def String toString(){
+		"${this.rol}"
+	}
 }
