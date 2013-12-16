@@ -2,12 +2,12 @@ package unplugged
 
 class UsuarioController {
 
-        def index={
+    def index={
 		redirect(action:"login2")
 	}
 	
 	
-        def login2 = {
+    def login2 = {
 		
 	}
 	

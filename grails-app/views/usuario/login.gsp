@@ -8,13 +8,13 @@
 
 <body>
 	<h1>Iniciar Sesi&oacuten</h1> <br/>
-	<g:form name="autentication" action="authenticate">
+	<form name="autentication" action="authenticate">
 	
-		Nombre <g:textField name="nombre"/><br/>
-		Contrase&ntildea <g:passwordField name="password"/><br/>
-		<g:message code="1" /> <br/>
+		Nombre <input type="text" name="nombre"/><br/>
+		Contrase&ntildea <input type="password" name="password"/><br/>
 		<br/>
-		<g:submitButton name="login" value="Entrar" />
-	</g:form>
+		<br/>
+		<input type="submit" name="login" value="Entrar" />
+	</form>
 </body>
 </html>

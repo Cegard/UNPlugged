@@ -7,14 +7,14 @@
 </head>
 <body>
 	<h1>Streaming</h1>
-	<g:form name="autentication" controller="VideoController">
-        Titulo: <g:textField name="titulo"/> <br>
+	<form name="autentication" controller="VideoController">
+        Titulo: <input type="text" name="titulo"/> <br>
         <%-- Fecha: <g:datePicker name="fecha" default="${new Date()}" precision="day" /> <br/> --%>
         Lugar: <g:textField name="lugar"/> <br>
-        Temas relacionados: <g:textField name="temas" /> <br/>
-        Ofrecido por: <g:textField name="ofrecidoPor" /> <br>
+        Temas relacionados: <input type="text" name="temas" /> <br/>
+        Ofrecido por: <input type="text" name="ofrecidoPor" /> <br>
         <br>  
-        <g:actionSubmit value="Iniciar transmición" action="submit"/>
-	</g:form>
+        <input type="submit" value="Iniciar transmición" action="submit"/>
+	</form>
 </body>
 </html>
