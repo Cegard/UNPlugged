@@ -21,7 +21,7 @@ body,td,th {
 
 <body>
     <p style="color: #FFF; font-size: 24px;"><strong>|| Inicio</strong></p>
-    <form name="autentication" action="authenticate">
+    <form name="autentication" action="autenticar">
         Nombre <input id="nombre" type="text" required="required" name="nombre"/> <br/>
         Contrase&ntildea <input id="pass" type="password" required="required" name="password"/> <br/>
 	<br/>
