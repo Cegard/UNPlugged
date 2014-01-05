@@ -14,11 +14,6 @@ class VideoController {
 	}
 	
 	
-	def videosGrabados = Video.where{
-		enVivo != true
-	}
-	
-	
 	def procesar = {
 		
 		def codigosProfesorEncargado = [] as Set // Almacenará los códigos de las clases o eventos
@@ -68,7 +63,7 @@ class VideoController {
 		toSee = streamClases + Video.find{(claseEvento.tipo == "evento") && enVivo}
 		
 		/*todos los vídeos almacenados en el servidor que no estén siendo transmitidos en vivo*/
-		flash.videos = VideosGrabados.find()
+		flash.videos = Video.find{enVivo == false}
 		
 		flash.toStream = toStream
 		flash.toSee = toSee
