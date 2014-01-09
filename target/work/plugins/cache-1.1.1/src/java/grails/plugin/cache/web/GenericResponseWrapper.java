@@ -43,14 +43,15 @@ import org.slf4j.LoggerFactory;
  * target of the request has delivered its response.
  * <p/>
  * It uses the Wrapper pattern.
- *
+ * 
  * Based on net.sf.ehcache.constructs.web.GenericResponseWrapper.
- *
+ * 
  * @author Greg Luck
  * @author Burt Beckwith
  */
 @SuppressWarnings("deprecation")
-public class GenericResponseWrapper extends HttpServletResponseWrapper implements Serializable {
+public class GenericResponseWrapper extends HttpServletResponseWrapper
+		implements Serializable {
 
 	private static final long serialVersionUID = 1;
 
@@ -67,7 +68,8 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	/**
 	 * Creates a GenericResponseWrapper
 	 */
-	public GenericResponseWrapper(final HttpServletResponse response, final SerializableOutputStream outputStream) {
+	public GenericResponseWrapper(final HttpServletResponse response,
+			final SerializableOutputStream outputStream) {
 		super(response);
 		out = new FilterServletOutputStream(outputStream);
 	}
@@ -86,9 +88,11 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	/**
 	 * Send the error. If the response is not ok, most of the logic is bypassed
 	 * and the error is sent raw Also, the content is not cached.
-	 *
-	 * @param code the status code
-	 * @param string the error message
+	 * 
+	 * @param code
+	 *            the status code
+	 * @param string
+	 *            the error message
 	 * @throws IOException
 	 */
 	@Override
@@ -100,8 +104,9 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	/**
 	 * Send the error. If the response is not ok, most of the logic is bypassed
 	 * and the error is sent raw Also, the content is not cached.
-	 *
-	 * @param code the status code
+	 * 
+	 * @param code
+	 *            the status code
 	 * @throws IOException
 	 */
 	@Override
@@ -113,8 +118,9 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	/**
 	 * Send the redirect. If the response is not ok, most of the logic is
 	 * bypassed and the error is sent raw. Also, the content is not cached.
-	 *
-	 * @param string the URL to redirect to
+	 * 
+	 * @param string
+	 *            the URL to redirect to
 	 * @throws IOException
 	 */
 	@Override
@@ -126,7 +132,8 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	@Override
 	public void setStatus(final int code, final String msg) {
 		statusCode = code;
-		LoggerFactory.getLogger(getClass()).warn("Discarding message because this method is deprecated.");
+		LoggerFactory.getLogger(getClass()).warn(
+				"Discarding message because this method is deprecated.");
 		super.setStatus(code);
 	}
 
@@ -159,7 +166,8 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	@Override
 	public PrintWriter getWriter() throws IOException {
 		if (writer == null) {
-			writer = new PrintWriter(new OutputStreamWriter(out, getCharacterEncoding()), true);
+			writer = new PrintWriter(new OutputStreamWriter(out,
+					getCharacterEncoding()), true);
 		}
 		return writer;
 	}
@@ -230,22 +238,24 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	public Collection<Header<? extends Serializable>> getAllHeaders() {
 		List<Header<? extends Serializable>> headers = new LinkedList<Header<? extends Serializable>>();
 
-		for (Map.Entry<String, List<Serializable>> headerEntry : headersMap.entrySet()) {
+		for (Map.Entry<String, List<Serializable>> headerEntry : headersMap
+				.entrySet()) {
 			String name = headerEntry.getKey();
 			for (Serializable value : headerEntry.getValue()) {
 				Type type = Header.Type.determineType(value.getClass());
 				switch (type) {
-					case STRING:
-						headers.add(new Header<String>(name, (String)value));
-						break;
-					case DATE:
-						headers.add(new Header<Long>(name, (Long)value));
-						break;
-					case INT:
-						headers.add(new Header<Integer>(name, (Integer)value));
-						break;
-					default:
-						throw new IllegalArgumentException("No mapping for Header.Type: " + type);
+				case STRING:
+					headers.add(new Header<String>(name, (String) value));
+					break;
+				case DATE:
+					headers.add(new Header<Long>(name, (Long) value));
+					break;
+				case INT:
+					headers.add(new Header<Integer>(name, (Integer) value));
+					break;
+				default:
+					throw new IllegalArgumentException(
+							"No mapping for Header.Type: " + type);
 				}
 			}
 		}
@@ -267,10 +277,14 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 	public void flushBuffer() throws IOException {
 		flush();
 
-		// doing this might leads to response already committed exception when the
-		// PageInfo has not yet built but the buffer already flushed. Happens in WebLogic
-		// when a servlet forward to a JSP page and the forward method trigger a flush
-		// before it forwarded to the JSP disableFlushBuffer for that purpose is 'true' by default
+		// doing this might leads to response already committed exception when
+		// the
+		// PageInfo has not yet built but the buffer already flushed. Happens in
+		// WebLogic
+		// when a servlet forward to a JSP page and the forward method trigger a
+		// flush
+		// before it forwarded to the JSP disableFlushBuffer for that purpose is
+		// 'true' by default
 		// EHC-447
 		if (!disableFlushBuffer) {
 			super.flushBuffer();
@@ -299,7 +313,7 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 
 	/**
 	 * Is the wrapped reponse's buffer flushing disabled?
-	 *
+	 * 
 	 * @return true if the wrapped reponse's buffer flushing disabled
 	 */
 	public boolean isDisableFlushBuffer() {
@@ -308,8 +322,10 @@ public class GenericResponseWrapper extends HttpServletResponseWrapper implement
 
 	/**
 	 * Set if the wrapped reponse's buffer flushing should be disabled.
-	 *
-	 * @param disable true if the wrapped reponse's buffer flushing should be disabled
+	 * 
+	 * @param disable
+	 *            true if the wrapped reponse's buffer flushing should be
+	 *            disabled
 	 */
 	public void setDisableFlushBuffer(boolean disable) {
 		disableFlushBuffer = disable;

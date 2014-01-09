@@ -23,7 +23,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Generate better cache key, compare to {@link org.springframework.cache.interceptor.DefaultKeyGenerator}
+ * Generate better cache key, compare to
+ * {@link org.springframework.cache.interceptor.DefaultKeyGenerator}
  */
 public class CustomCacheKeyGenerator implements KeyGenerator {
 

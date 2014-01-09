@@ -34,8 +34,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.View;
 
 /**
- * Overrides the default Grails view resolver and resolves scaffolded views at runtime.
- *
+ * Overrides the default Grails view resolver and resolves scaffolded views at
+ * runtime.
+ * 
  * @author Graeme Rocher
  * @since 1.1
  */
@@ -46,7 +47,8 @@ public class ScaffoldingViewResolver extends GrailsViewResolver {
 	Map<String, GrailsDomainClass> scaffoldedDomains = Collections.emptyMap();
 
 	static final Map<String, View> scaffoldedViews = new ConcurrentHashMap<String, View>();
-	protected static final Log log = LogFactory.getLog(ScaffoldingViewResolver.class);
+	protected static final Log log = LogFactory
+			.getLog(ScaffoldingViewResolver.class);
 
 	/**
 	 * Clears any cached scaffolded views.
@@ -58,42 +60,46 @@ public class ScaffoldingViewResolver extends GrailsViewResolver {
 	@Override
 	protected View createFallbackView(String viewName) throws Exception {
 		GrailsWebRequest webRequest = GrailsWebRequest.lookup();
-		
+
 		String[] viewNameParts = splitViewName(viewName);
-		if(viewNameParts.length == 1) {
-		    viewName = WebUtils.addViewPrefix(viewName, webRequest.getControllerName());
-		    viewNameParts = splitViewName(viewName);
+		if (viewNameParts.length == 1) {
+			viewName = WebUtils.addViewPrefix(viewName,
+					webRequest.getControllerName());
+			viewNameParts = splitViewName(viewName);
 		}
 
 		View v = scaffoldedViews.get(viewName);
-        if (v == null) {
-			GrailsDomainClass domainClass = scaffoldedDomains.get(viewNameParts[0]);
+		if (v == null) {
+			GrailsDomainClass domainClass = scaffoldedDomains
+					.get(viewNameParts[0]);
 			if (domainClass != null) {
 				String viewCode = null;
 				try {
 					viewCode = generateViewSource(viewNameParts[1], domainClass);
-				}
-				catch (Exception e) {
-					log.error("Error generating scaffolded view [" + viewName + "]: " + e.getMessage(),e);
+				} catch (Exception e) {
+					log.error("Error generating scaffolded view [" + viewName
+							+ "]: " + e.getMessage(), e);
 				}
 				if (StringUtils.hasLength(viewCode)) {
 					v = createScaffoldedView(viewName, viewCode);
 					scaffoldedViews.put(viewName, v);
 				}
 			}
-        }
-        if (v != null) {
-            return v;
-        }
+		}
+		if (v != null) {
+			return v;
+		}
 		return super.createFallbackView(viewName);
 	}
 
-    protected String[] splitViewName(String viewName) {
-        return org.apache.commons.lang.StringUtils.split(viewName, '/');
-    }
+	protected String[] splitViewName(String viewName) {
+		return org.apache.commons.lang.StringUtils.split(viewName, '/');
+	}
 
-	protected View createScaffoldedView(String viewName, String viewCode) throws Exception {
-		final ScaffoldedGroovyPageView view = new ScaffoldedGroovyPageView(viewName, viewCode);
+	protected View createScaffoldedView(String viewName, String viewCode)
+			throws Exception {
+		final ScaffoldedGroovyPageView view = new ScaffoldedGroovyPageView(
+				viewName, viewCode);
 		view.setApplicationContext(getApplicationContext());
 		view.setServletContext(getServletContext());
 		view.setTemplateEngine(templateEngine);
@@ -101,9 +107,10 @@ public class ScaffoldingViewResolver extends GrailsViewResolver {
 		return view;
 	}
 
-	protected String generateViewSource(String viewName, GrailsDomainClass domainClass) throws IOException {
+	protected String generateViewSource(String viewName,
+			GrailsDomainClass domainClass) throws IOException {
 		Writer sw = new FastStringWriter();
-		templateGenerator.generateView(domainClass, viewName,sw);
+		templateGenerator.generateView(domainClass, viewName, sw);
 		return sw.toString();
 	}
 

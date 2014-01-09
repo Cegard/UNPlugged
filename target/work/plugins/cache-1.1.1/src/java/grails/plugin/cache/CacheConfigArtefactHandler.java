@@ -25,7 +25,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 /**
  * Artefact handler for CacheConfig classes.
- *
+ * 
  * @author Burt Beckwith
  */
 public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
@@ -37,24 +37,27 @@ public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
 	 * Default constructor.
 	 */
 	public CacheConfigArtefactHandler() {
-		super(TYPE, CacheConfigGrailsClass.class, DefaultCacheConfigGrailsClass.class, TYPE);
+		super(TYPE, CacheConfigGrailsClass.class,
+				DefaultCacheConfigGrailsClass.class, TYPE);
 	}
 
 	/**
 	 * GrailsClass interface for CacheConfig definitions.
 	 */
-	public static interface CacheConfigGrailsClass extends InjectableGrailsClass {
+	public static interface CacheConfigGrailsClass extends
+			InjectableGrailsClass {
 		// no methods
 	}
 
 	/**
 	 * Default implementation of <code>CacheConfigGrailsClass</code>.
 	 */
-	public static class DefaultCacheConfigGrailsClass extends AbstractInjectableGrailsClass
-	       implements CacheConfigGrailsClass {
+	public static class DefaultCacheConfigGrailsClass extends
+			AbstractInjectableGrailsClass implements CacheConfigGrailsClass {
 
 		/**
 		 * Default constructor.
+		 * 
 		 * @param wrappedClass
 		 */
 		public DefaultCacheConfigGrailsClass(Class<?> wrappedClass) {
@@ -64,7 +67,8 @@ public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
 		@Override
 		public MetaClass getMetaClass() {
 			// Workaround for http://jira.codehaus.org/browse/GRAILS-4542
-			return GroovySystem.getMetaClassRegistry().getMetaClass(DefaultCacheConfigGrailsClass.class);
+			return GroovySystem.getMetaClassRegistry().getMetaClass(
+					DefaultCacheConfigGrailsClass.class);
 		}
 
 		@Override
@@ -75,7 +79,8 @@ public class CacheConfigArtefactHandler extends ArtefactHandlerAdapter {
 		}
 
 		protected void autowireBeanProperties(Object instance) {
-			ConfigurableApplicationContext ctx = (ConfigurableApplicationContext)grailsApplication.getMainContext();
+			ConfigurableApplicationContext ctx = (ConfigurableApplicationContext) grailsApplication
+					.getMainContext();
 			ctx.getBeanFactory().autowireBeanProperties(instance,
 					AutowireCapableBeanFactory.AUTOWIRE_BY_NAME, false);
 		}

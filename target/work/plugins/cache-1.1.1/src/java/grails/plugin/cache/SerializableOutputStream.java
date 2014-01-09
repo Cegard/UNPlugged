@@ -19,10 +19,11 @@ import java.io.Serializable;
 
 /**
  * Abstract base class for serializable OutputStream classes.
- *
+ * 
  * @author Burt Beckwith
  */
 @SuppressWarnings("serial")
-public abstract class SerializableOutputStream extends OutputStream implements Serializable {
+public abstract class SerializableOutputStream extends OutputStream implements
+		Serializable {
 	// no methods
 }

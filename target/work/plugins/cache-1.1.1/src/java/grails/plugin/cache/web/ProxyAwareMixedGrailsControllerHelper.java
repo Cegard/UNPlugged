@@ -30,16 +30,19 @@ import org.springframework.util.ReflectionUtils;
  * The default implementation doesn't expect controllers to be proxied, and this
  * causes action methods to be ignored. Registered as the
  * "grailsControllerHelper" bean to replace the default.
- *
+ * 
  * @author Burt Beckwith
  */
-public class ProxyAwareMixedGrailsControllerHelper extends MixedGrailsControllerHelper {
+public class ProxyAwareMixedGrailsControllerHelper extends
+		MixedGrailsControllerHelper {
 
 	@Override
-	protected Object retrieveAction(GroovyObject controller, String actionName, HttpServletResponse response) {
+	protected Object retrieveAction(GroovyObject controller, String actionName,
+			HttpServletResponse response) {
 
-		Method method = ReflectionUtils.findMethod(AopProxyUtils.ultimateTargetClass(controller),
-				actionName, MethodGrailsControllerHelper.NOARGS);
+		Method method = ReflectionUtils.findMethod(
+				AopProxyUtils.ultimateTargetClass(controller), actionName,
+				MethodGrailsControllerHelper.NOARGS);
 
 		if (method != null) {
 			ReflectionUtils.makeAccessible(method);

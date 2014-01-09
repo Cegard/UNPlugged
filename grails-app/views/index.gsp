@@ -11,14 +11,14 @@
         <meta charset="utf-8">
         <title>UNPlugged Index</title>
     </head>
-    <FRAMESET cols="20%, 80%"  >
-        <FRAMESET rows="226,266" cols="*" bordercolor="#171C18">
+    
+    <FRAMESET cols="12%, 88%"  >
+        <FRAMESET rows="126,266" cols="*" bordercolor="#000">
             <FRAME src="Usuario.gsp" name="Login" noresize scrolling="no"/>
             <FRAME src="NavPanel.gsp" name="NavPanel" noresize scrolling="no"/>
     </FRAMESET>
 
     <FRAME src="Frame.gsp" name="FramePrincipal"/>
-    <NOFRAMES> </NOFRAMES>
-    
+  
 </html>
 

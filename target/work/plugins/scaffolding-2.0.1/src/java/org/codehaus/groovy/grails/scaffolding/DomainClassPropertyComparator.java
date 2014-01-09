@@ -24,11 +24,13 @@ import org.codehaus.groovy.grails.validation.ConstrainedProperty;
 import org.springframework.util.Assert;
 
 /**
- * Comparator that uses the domain class property constraints to establish order in sort methods and always
- * places the id first.
- *
+ * Comparator that uses the domain class property constraints to establish order
+ * in sort methods and always places the id first.
+ * 
  * @author Graeme Rocher
- * @deprecated Use org.codehaus.groovy.grails.validation.DomainClassPropertyComparator instead
+ * @deprecated Use
+ *             org.codehaus.groovy.grails.validation.DomainClassPropertyComparator
+ *             instead
  */
 @SuppressWarnings("rawtypes")
 @Deprecated
@@ -52,11 +54,13 @@ public class DomainClassPropertyComparator implements Comparator {
 			return 1;
 		}
 
-		GrailsDomainClassProperty prop1 = (GrailsDomainClassProperty)o1;
-		GrailsDomainClassProperty prop2 = (GrailsDomainClassProperty)o2;
+		GrailsDomainClassProperty prop1 = (GrailsDomainClassProperty) o1;
+		GrailsDomainClassProperty prop2 = (GrailsDomainClassProperty) o2;
 
-		ConstrainedProperty cp1 = (ConstrainedProperty)constrainedProperties.get(prop1.getName());
-		ConstrainedProperty cp2 = (ConstrainedProperty)constrainedProperties.get(prop2.getName());
+		ConstrainedProperty cp1 = (ConstrainedProperty) constrainedProperties
+				.get(prop1.getName());
+		ConstrainedProperty cp2 = (ConstrainedProperty) constrainedProperties
+				.get(prop2.getName());
 
 		if (cp1 == null & cp2 == null) {
 			return prop1.getName().compareTo(prop2.getName());

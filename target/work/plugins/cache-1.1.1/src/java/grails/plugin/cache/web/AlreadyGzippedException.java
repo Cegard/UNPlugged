@@ -16,7 +16,7 @@ package grails.plugin.cache.web;
 
 /**
  * Based on net.sf.ehcache.constructs.web.AlreadyGzippedException.
- *
+ * 
  * @author Greg Luck
  * @author Burt Beckwith
  */

@@ -20,7 +20,7 @@ import javax.servlet.http.Cookie;
 
 /**
  * Based on net.sf.ehcache.constructs.web.SerializableCookie.
- *
+ * 
  * @author Greg Luck
  * @author Adam Murdoch
  * @author Burt Beckwith

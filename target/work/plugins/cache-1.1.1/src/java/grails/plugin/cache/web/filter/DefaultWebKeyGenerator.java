@@ -21,7 +21,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Default implementation.
- *
+ * 
  * @author Burt Beckwith
  */
 public class DefaultWebKeyGenerator implements WebKeyGenerator {
@@ -45,7 +45,8 @@ public class DefaultWebKeyGenerator implements WebKeyGenerator {
 		if (supportAjax) {
 			String requestedWith = request.getHeader(X_REQUESTED_WITH);
 			if (StringUtils.hasLength(requestedWith)) {
-				key.append(':').append(X_REQUESTED_WITH).append(':').append(requestedWith);
+				key.append(':').append(X_REQUESTED_WITH).append(':')
+						.append(requestedWith);
 			}
 		}
 

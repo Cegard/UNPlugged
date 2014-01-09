@@ -27,8 +27,9 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 /**
- * Based on package-scope org.springframework.cache.interceptor.ExpressionEvaluator
- *
+ * Based on package-scope
+ * org.springframework.cache.interceptor.ExpressionEvaluator
+ * 
  * @author Costin Leau
  * @author Burt Beckwith
  */
@@ -43,14 +44,17 @@ public class ExpressionEvaluator {
 	protected Map<String, Expression> keyCache = new ConcurrentHashMap<String, Expression>();
 	protected Map<String, Method> targetMethodCache = new ConcurrentHashMap<String, Method>();
 
-	public EvaluationContext createEvaluationContext(Collection<Cache> caches, Method method,
-			Object[] args, Class<?> targetClass) {
-		CacheExpressionRootObject rootObject = new CacheExpressionRootObject(caches, method, targetClass);
-		return new LazyParamAwareEvaluationContext(rootObject, paramNameDiscoverer, method,
-				args, targetClass, targetMethodCache);
+	public EvaluationContext createEvaluationContext(Collection<Cache> caches,
+			Method method, Object[] args, Class<?> targetClass) {
+		CacheExpressionRootObject rootObject = new CacheExpressionRootObject(
+				caches, method, targetClass);
+		return new LazyParamAwareEvaluationContext(rootObject,
+				paramNameDiscoverer, method, args, targetClass,
+				targetMethodCache);
 	}
 
-	public boolean condition(String conditionExpression, Method method, EvaluationContext evalContext) {
+	public boolean condition(String conditionExpression, Method method,
+			EvaluationContext evalContext) {
 		String key = toString(method, conditionExpression);
 		Expression condExp = conditionCache.get(key);
 		if (condExp == null) {
@@ -60,7 +64,8 @@ public class ExpressionEvaluator {
 		return condExp.getValue(evalContext, boolean.class);
 	}
 
-	public Object key(String keyExpression, Method method, EvaluationContext evalContext) {
+	public Object key(String keyExpression, Method method,
+			EvaluationContext evalContext) {
 		String key = toString(method, keyExpression);
 		Expression keyExp = keyCache.get(key);
 		if (keyExp == null) {
@@ -71,6 +76,7 @@ public class ExpressionEvaluator {
 	}
 
 	protected String toString(Method method, String expression) {
-		return method.getDeclaringClass().getName() + '#' + method + '#' + expression;
+		return method.getDeclaringClass().getName() + '#' + method + '#'
+				+ expression;
 	}
 }

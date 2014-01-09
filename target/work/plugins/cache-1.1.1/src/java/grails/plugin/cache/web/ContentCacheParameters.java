@@ -28,7 +28,7 @@ import org.springframework.util.StringUtils;
 
 /**
  * Based on grails.plugin.springcache.web.ContentCacheParameters.
- *
+ * 
  * @author Rob Fletcher
  * @author Burt Beckwith
  */
@@ -36,8 +36,8 @@ public class ContentCacheParameters {
 
 	protected final GrailsWebRequest grailsWebRequest;
 
-	/*@Lazy*/ protected GrailsControllerClass controllerClass;
-	/*@Lazy*/ protected Method method;
+	/* @Lazy */protected GrailsControllerClass controllerClass;
+	/* @Lazy */protected Method method;
 	protected String actionName;
 
 	public ContentCacheParameters(GrailsWebRequest request) {
@@ -78,8 +78,10 @@ public class ContentCacheParameters {
 	}
 
 	protected void initController() {
-		controllerClass = (GrailsControllerClass) GrailsWebRequest.lookupApplication().getArtefactForFeature(
-				ControllerArtefactHandler.TYPE, '/' + getControllerName());
+		controllerClass = (GrailsControllerClass) GrailsWebRequest
+				.lookupApplication().getArtefactForFeature(
+						ControllerArtefactHandler.TYPE,
+						'/' + getControllerName());
 	}
 
 	protected void initAction() {
@@ -96,17 +98,17 @@ public class ContentCacheParameters {
 			}
 		}
 
-		// if the controller class method has parameters, there will be two methods; one no-arg
-		// and one with args that gets delegated to by the no-arg method. we need the one with
+		// if the controller class method has parameters, there will be two
+		// methods; one no-arg
+		// and one with args that gets delegated to by the no-arg method. we
+		// need the one with
 		// args if it exists
 		if (matches.size() == 1) {
 			method = matches.get(0);
-		}
-		else if (matches.size() > 1) {
+		} else if (matches.size() > 1) {
 			if (matches.get(0).getParameterTypes().length > 0) {
 				method = matches.get(0);
-			}
-			else {
+			} else {
 				method = matches.get(1);
 			}
 		}
@@ -120,9 +122,11 @@ public class ContentCacheParameters {
 	public String toString() {
 		StringBuilder buffer = new StringBuilder("[");
 		buffer.append("controller=").append(getControllerName());
-		if (controllerClass == null) buffer.append("?");
+		if (controllerClass == null)
+			buffer.append("?");
 		buffer.append(", action=").append(getActionName());
-		if (method == null) buffer.append("?");
+		if (method == null)
+			buffer.append("?");
 		buffer.append("]");
 		return buffer.toString();
 	}

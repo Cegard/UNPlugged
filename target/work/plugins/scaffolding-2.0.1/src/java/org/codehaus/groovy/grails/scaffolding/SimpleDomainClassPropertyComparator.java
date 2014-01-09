@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 
 /**
  * Comparator used when Hibernate isn't installed.
- *
+ * 
  * @author Burt Beckwith
  */
 @SuppressWarnings("rawtypes")

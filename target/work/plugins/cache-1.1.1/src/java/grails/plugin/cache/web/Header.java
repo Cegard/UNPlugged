@@ -21,10 +21,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.util.Assert;
 
 /**
- * Generic implementation of a HTTP header. Handles String, Int and Date typed headers.
- *
+ * Generic implementation of a HTTP header. Handles String, Int and Date typed
+ * headers.
+ * 
  * Based on net.sf.ehcache.constructs.web.Header.
- *
+ * 
  * @author Eric Dalquist
  * @author Burt Beckwith
  */
@@ -101,9 +102,11 @@ public class Header<T extends Serializable> implements Serializable {
 
 	/**
 	 * Create a new Header
-	 *
-	 * @param name Name of the header, may not be null
-	 * @param value Value of the header, may not be null
+	 * 
+	 * @param name
+	 *            Name of the header, may not be null
+	 * @param value
+	 *            Value of the header, may not be null
 	 */
 	public Header(String name, T value) {
 		Assert.notNull(name, "Header cannnot have a null name");
@@ -161,29 +164,26 @@ public class Header<T extends Serializable> implements Serializable {
 		if (getClass() != obj.getClass()) {
 			return false;
 		}
-		Header<?> other = (Header<?>)obj;
+		Header<?> other = (Header<?>) obj;
 		if (name == null) {
 			if (other.name != null) {
 				return false;
 			}
-		}
-		else if (!name.equals(other.name)) {
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
 		if (type == null) {
 			if (other.type != null) {
 				return false;
 			}
-		}
-		else if (!type.equals(other.type)) {
+		} else if (!type.equals(other.type)) {
 			return false;
 		}
 		if (value == null) {
 			if (other.value != null) {
 				return false;
 			}
-		}
-		else if (!value.equals(other.value)) {
+		} else if (!value.equals(other.value)) {
 			return false;
 		}
 		return true;
@@ -191,6 +191,7 @@ public class Header<T extends Serializable> implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Header<" + type.getTypeClass().getSimpleName() + "> [name=" + name + ", value=" + value + "]";
+		return "Header<" + type.getTypeClass().getSimpleName() + "> [name="
+				+ name + ", value=" + value + "]";
 	}
 }

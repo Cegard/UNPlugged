@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * Generates cache keys for requests.
- *
+ * 
  * @author Burt Beckwith
  */
 public interface WebKeyGenerator {

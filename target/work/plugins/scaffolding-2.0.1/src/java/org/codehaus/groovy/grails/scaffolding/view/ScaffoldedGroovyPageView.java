@@ -33,18 +33,21 @@ import org.codehaus.groovy.grails.web.sitemesh.GrailsLayoutDecoratorMapper;
 import org.springframework.util.Assert;
 
 /**
- * A special Spring View for scaffolding that renders an in-memory scaffolded view to the response.
- *
+ * A special Spring View for scaffolding that renders an in-memory scaffolded
+ * view to the response.
+ * 
  * @author Graeme Rocher
  * @since 0.5
  */
 public class ScaffoldedGroovyPageView extends GroovyPageView {
 
 	private String contents;
-	protected static final Log log = LogFactory.getLog(ScaffoldedGroovyPageView.class);
+	protected static final Log log = LogFactory
+			.getLog(ScaffoldedGroovyPageView.class);
 
 	public ScaffoldedGroovyPageView(String uri, String contents) {
-		Assert.hasLength(contents, "Argument [contents] cannot be blank or null");
+		Assert.hasLength(contents,
+				"Argument [contents] cannot be blank or null");
 		Assert.hasLength(uri, "Argument [uri] cannot be blank or null");
 
 		this.contents = contents;
@@ -53,7 +56,7 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 
 	/**
 	 * Used for debug reporting.
-	 *
+	 * 
 	 * @return The URL of the view
 	 */
 	@Override
@@ -62,22 +65,29 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 	}
 
 	/**
-	 * Overrides the default implementation to render a GSP view using an in-memory representation
-	 * held in the #contents property.
-	 *
-	 * @param templateEngine The GroovyPagesTemplateEngine instance
-	 * @param model The model
-	 * @param response The HttpServletResponse instance
-	 *
-	 * @throws IOException Thrown if there was an IO error rendering the view
+	 * Overrides the default implementation to render a GSP view using an
+	 * in-memory representation held in the #contents property.
+	 * 
+	 * @param templateEngine
+	 *            The GroovyPagesTemplateEngine instance
+	 * @param model
+	 *            The model
+	 * @param response
+	 *            The HttpServletResponse instance
+	 * 
+	 * @throws IOException
+	 *             Thrown if there was an IO error rendering the view
 	 */
 	@SuppressWarnings("rawtypes")
 	@Override
-	protected void renderWithTemplateEngine(GroovyPagesTemplateEngine templateEngine, Map model,
-			HttpServletResponse response, HttpServletRequest request) throws IOException {
+	protected void renderWithTemplateEngine(
+			GroovyPagesTemplateEngine templateEngine, Map model,
+			HttpServletResponse response, HttpServletRequest request)
+			throws IOException {
 
 		if (log.isDebugEnabled()) {
-			log.debug("Rendering scaffolded view [" + getUrl() + "] with model [" + model + "]");
+			log.debug("Rendering scaffolded view [" + getUrl()
+					+ "] with model [" + model + "]");
 		}
 
 		request.setAttribute(GrailsLayoutDecoratorMapper.RENDERING_VIEW, true);
@@ -86,11 +96,9 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 		try {
 			out = createResponseWriter(response);
 			w.writeTo(out);
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			handleException(e, templateEngine);
-		}
-		finally {
+		} finally {
 			if (out != null) {
 				out.close();
 			}
@@ -101,7 +109,7 @@ public class ScaffoldedGroovyPageView extends GroovyPageView {
 	protected void initTemplate() throws IOException {
 		template = templateEngine.createTemplate(contents, getUrl());
 		if (template instanceof GroovyPageTemplate) {
-			((GroovyPageTemplate)template).setAllowSettingContentType(true);
+			((GroovyPageTemplate) template).setAllowSettingContentType(true);
 		}
 	}
 }

@@ -25,16 +25,19 @@ import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProce
 import org.springframework.cache.annotation.AnnotationCacheOperationSource;
 
 /**
- * Changes the bean class of the org.springframework.cache.annotation.AnnotationCacheOperationSource#0
- * bean to a custom subclass.
- *
+ * Changes the bean class of the
+ * org.springframework.cache.annotation.AnnotationCacheOperationSource#0 bean to
+ * a custom subclass.
+ * 
  * @author Burt Beckwith
  */
-public class CacheBeanPostProcessor implements BeanDefinitionRegistryPostProcessor {
+public class CacheBeanPostProcessor implements
+		BeanDefinitionRegistryPostProcessor {
 
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
-	public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) {
+	public void postProcessBeanDefinitionRegistry(
+			BeanDefinitionRegistry registry) {
 		log.info("postProcessBeanDefinitionRegistry start");
 
 		AbstractBeanDefinition beanDef = findBeanDefinition(registry);
@@ -52,26 +55,30 @@ public class CacheBeanPostProcessor implements BeanDefinitionRegistryPostProcess
 			props = new MutablePropertyValues();
 			beanDef.setPropertyValues(props);
 		}
-		props.addPropertyValue("grailsApplication", new RuntimeBeanReference("grailsApplication", true));
+		props.addPropertyValue("grailsApplication", new RuntimeBeanReference(
+				"grailsApplication", true));
 
 		log.debug("updated {}", beanDef);
 	}
 
-	protected AbstractBeanDefinition findBeanDefinition(BeanDefinitionRegistry registry) {
+	protected AbstractBeanDefinition findBeanDefinition(
+			BeanDefinitionRegistry registry) {
 
 		AbstractBeanDefinition beanDef = null;
 		String beanName = null;
 
-		if (registry.containsBeanDefinition(GrailsAnnotationCacheOperationSource.BEAN_NAME)) {
-			beanDef = (AbstractBeanDefinition)registry.getBeanDefinition(
-					GrailsAnnotationCacheOperationSource.BEAN_NAME);
+		if (registry
+				.containsBeanDefinition(GrailsAnnotationCacheOperationSource.BEAN_NAME)) {
+			beanDef = (AbstractBeanDefinition) registry
+					.getBeanDefinition(GrailsAnnotationCacheOperationSource.BEAN_NAME);
 			beanName = GrailsAnnotationCacheOperationSource.BEAN_NAME;
-		}
-		else {
+		} else {
 			String className = AnnotationCacheOperationSource.class.getName();
 			for (String name : registry.getBeanDefinitionNames()) {
-				if (className.equals(registry.getBeanDefinition(name).getBeanClassName())) {
-					beanDef = (AbstractBeanDefinition)registry.getBeanDefinition(name);
+				if (className.equals(registry.getBeanDefinition(name)
+						.getBeanClassName())) {
+					beanDef = (AbstractBeanDefinition) registry
+							.getBeanDefinition(name);
 					beanName = name;
 					break;
 				}
@@ -88,7 +95,8 @@ public class CacheBeanPostProcessor implements BeanDefinitionRegistryPostProcess
 		return beanDef;
 	}
 
-	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) {
+	public void postProcessBeanFactory(
+			ConfigurableListableBeanFactory beanFactory) {
 		log.info("postProcessBeanFactory");
 	}
 }

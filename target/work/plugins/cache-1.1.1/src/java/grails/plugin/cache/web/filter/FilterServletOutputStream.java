@@ -23,13 +23,14 @@ import javax.servlet.ServletOutputStream;
 
 /**
  * A custom {@link javax.servlet.ServletOutputStream} for use by our filters.
- *
+ * 
  * Based on net.sf.ehcache.constructs.web.filter.FilterServletOutputStream.
- *
+ * 
  * @author Greg Luck
  * @author Burt Beckwith
  */
-public class FilterServletOutputStream extends ServletOutputStream implements Serializable {
+public class FilterServletOutputStream extends ServletOutputStream implements
+		Serializable {
 
 	private static final long serialVersionUID = 1;
 
@@ -50,7 +51,8 @@ public class FilterServletOutputStream extends ServletOutputStream implements Se
 	}
 
 	@Override
-	public void write(final byte[] b, final int off, final int len) throws IOException {
+	public void write(final byte[] b, final int off, final int len)
+			throws IOException {
 		stream.write(b, off, len);
 	}
 }

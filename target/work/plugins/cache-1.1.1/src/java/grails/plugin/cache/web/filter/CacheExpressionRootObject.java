@@ -22,7 +22,7 @@ import org.springframework.util.Assert;
 
 /**
  * Based on package-scope org.springframework.cache.interceptor.
- *
+ * 
  * @author Costin Leau
  * @author Burt Beckwith
  */
@@ -32,7 +32,8 @@ public class CacheExpressionRootObject {
 	protected final Method method;
 	protected final Class<?> targetClass;
 
-	public CacheExpressionRootObject(Collection<Cache> caches, Method method, Class<?> targetClass) {
+	public CacheExpressionRootObject(Collection<Cache> caches, Method method,
+			Class<?> targetClass) {
 
 		Assert.notNull(method, "Method is required");
 		Assert.notNull(targetClass, "targetClass is required");

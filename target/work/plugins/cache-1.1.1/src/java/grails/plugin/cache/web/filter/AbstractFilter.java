@@ -36,7 +36,7 @@ import org.springframework.web.filter.GenericFilterBean;
 
 /**
  * Based on net.sf.ehcache.constructs.web.filter.Filter.
- *
+ * 
  * @author Greg Luck
  * @author Burt Beckwith
  */
@@ -53,33 +53,35 @@ public abstract class AbstractFilter extends GenericFilterBean {
 	protected Object nativeCacheManager;
 	protected boolean suppressStackTraces;
 
-	public final void doFilter(final ServletRequest req, final ServletResponse res, final FilterChain chain)
+	public final void doFilter(final ServletRequest req,
+			final ServletResponse res, final FilterChain chain)
 			throws ServletException, IOException {
-		HttpServletRequest request = (HttpServletRequest)req;
-		HttpServletResponse response = (HttpServletResponse)res;
+		HttpServletRequest request = (HttpServletRequest) req;
+		HttpServletResponse response = (HttpServletResponse) res;
 		try {
-			// NO_FILTER set for RequestDispatcher forwards to avoid double gzipping
+			// NO_FILTER set for RequestDispatcher forwards to avoid double
+			// gzipping
 			if (filterNotDisabled(request)) {
 				doFilter(request, response, chain);
-			}
-			else {
+			} else {
 				chain.doFilter(req, res);
 			}
-		}
-		catch (Throwable throwable) {
+		} catch (Throwable throwable) {
 			logThrowable(throwable, request);
 		}
 	}
 
-	protected abstract void doFilter(final HttpServletRequest httpRequest, final HttpServletResponse httpResponse,
-			final FilterChain chain) throws Throwable;
+	protected abstract void doFilter(final HttpServletRequest httpRequest,
+			final HttpServletResponse httpResponse, final FilterChain chain)
+			throws Throwable;
 
 	/**
 	 * Filters can be disabled programmatically by adding a {@link #NO_FILTER}
 	 * parameter to the request. This parameter is normally added to make
 	 * RequestDispatcher include and forwards work.
-	 *
-	 * @param httpRequest the request
+	 * 
+	 * @param httpRequest
+	 *            the request
 	 * @return true if NO_FILTER is not set.
 	 */
 	protected boolean filterNotDisabled(final HttpServletRequest request) {
@@ -89,28 +91,25 @@ public abstract class AbstractFilter extends GenericFilterBean {
 	/**
 	 * This method should throw IOExceptions, not wrap them.
 	 */
-	protected void logThrowable(final Throwable throwable, final HttpServletRequest httpRequest)
-			throws ServletException, IOException {
+	protected void logThrowable(final Throwable throwable,
+			final HttpServletRequest httpRequest) throws ServletException,
+			IOException {
 
 		StringBuilder messageBuffer = new StringBuilder(
 				"Throwable thrown during doFilter on request with URI: ")
-				.append(httpRequest.getRequestURI())
-				.append(" and Query: ")
-				.append(httpRequest.getQueryString())
-				.append(" : ")
+				.append(httpRequest.getRequestURI()).append(" and Query: ")
+				.append(httpRequest.getQueryString()).append(" : ")
 				.append(throwable.getMessage());
 
 		if (suppressStackTraces) {
-			log.warn(messageBuffer
-					.append("\nTop StackTraceElement: ")
+			log.warn(messageBuffer.append("\nTop StackTraceElement: ")
 					.append(throwable.getStackTrace()[0]).toString());
-		}
-		else {
+		} else {
 			log.warn(messageBuffer.toString(), throwable);
 		}
 
 		if (throwable instanceof IOException) {
-			throw (IOException)throwable;
+			throw (IOException) throwable;
 		}
 
 		throw new ServletException(throwable);
@@ -124,15 +123,18 @@ public abstract class AbstractFilter extends GenericFilterBean {
 		return nativeCacheManager;
 	}
 
-	protected boolean acceptsEncoding(final HttpServletRequest request, final String name) {
+	protected boolean acceptsEncoding(final HttpServletRequest request,
+			final String name) {
 		return headerContains(request, "Accept-Encoding", name);
 	}
 
-	protected boolean headerContains(final HttpServletRequest request, final String header, final String value) {
+	protected boolean headerContains(final HttpServletRequest request,
+			final String header, final String value) {
 
 		logRequestHeaders(request);
 
-		for (Enumeration<String> accepted = request.getHeaders(header); accepted.hasMoreElements(); ) {
+		for (Enumeration<String> accepted = request.getHeaders(header); accepted
+				.hasMoreElements();) {
 			String headerValue = accepted.nextElement();
 			if (headerValue.indexOf(value) != -1) {
 				return true;
@@ -148,19 +150,21 @@ public abstract class AbstractFilter extends GenericFilterBean {
 
 		Map<String, String> headers = new HashMap<String, String>();
 		StringBuilder logLine = new StringBuilder("Request Headers");
-		for (Enumeration<String> enumeration = request.getHeaderNames(); enumeration.hasMoreElements(); ) {
+		for (Enumeration<String> enumeration = request.getHeaderNames(); enumeration
+				.hasMoreElements();) {
 			String name = enumeration.nextElement();
 			String headerValue = request.getHeader(name);
 			headers.put(name, headerValue);
-			logLine.append(": ").append(name).append(" -> ").append(headerValue);
+			logLine.append(": ").append(name).append(" -> ")
+					.append(headerValue);
 		}
 		log.debug(logLine.toString());
 	}
 
 	/**
 	 * Determine whether the user agent accepts GZIP encoding. This feature is
-	 * part of HTTP1.1. If a browser accepts GZIP encoding it will advertise this
-	 * by including in its HTTP header:
+	 * part of HTTP1.1. If a browser accepts GZIP encoding it will advertise
+	 * this by including in its HTTP header:
 	 * <p/>
 	 * <code>
 	 * Accept-Encoding: gzip
@@ -180,7 +184,7 @@ public abstract class AbstractFilter extends GenericFilterBean {
 	 * </ul>
 	 * As of September 2004, about 34% of requests coming from the Internet did
 	 * not accept GZIP encoding.
-	 *
+	 * 
 	 * @param request
 	 * @return true, if the User Agent request accepts GZIP encoding
 	 */
@@ -191,14 +195,16 @@ public abstract class AbstractFilter extends GenericFilterBean {
 	// TODO remove, use DI
 	@SuppressWarnings("unchecked")
 	protected <T> T getBean(String name) {
-		ApplicationContext ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(
-				getServletContext());
-		return (T)ctx.getBean(name);
+		ApplicationContext ctx = WebApplicationContextUtils
+				.getRequiredWebApplicationContext(getServletContext());
+		return (T) ctx.getBean(name);
 	}
 
 	/**
 	 * Dependency injection for the cache manager.
-	 * @param cacheManager the manager
+	 * 
+	 * @param cacheManager
+	 *            the manager
 	 */
 	public void setCacheManager(CacheManager manager) {
 		cacheManager = manager;
@@ -206,7 +212,9 @@ public abstract class AbstractFilter extends GenericFilterBean {
 
 	/**
 	 * Dependency injection for the native cache manager.
-	 * @param nativeCacheManager the manager
+	 * 
+	 * @param nativeCacheManager
+	 *            the manager
 	 */
 	public void setNativeCacheManager(Object manager) {
 		nativeCacheManager = manager;
@@ -214,7 +222,9 @@ public abstract class AbstractFilter extends GenericFilterBean {
 
 	/**
 	 * Dependency injection for whether to suppress stacktraces.
-	 * @param suppress if true only log the message
+	 * 
+	 * @param suppress
+	 *            if true only log the message
 	 */
 	public void setSuppressStackTraces(boolean suppress) {
 		suppressStackTraces = suppress;
@@ -224,9 +234,10 @@ public abstract class AbstractFilter extends GenericFilterBean {
 	public void afterPropertiesSet() throws ServletException {
 		super.afterPropertiesSet();
 		Assert.notNull(cacheManager, "cacheManager is required");
-//		Assert.notNull(nativeCacheManager, "nativeCacheManager is required");
+		// Assert.notNull(nativeCacheManager, "nativeCacheManager is required");
 		if (suppressStackTraces && log.isDebugEnabled()) {
-			log.debug("Suppression of stack traces enabled for {}", getClass().getName());
+			log.debug("Suppression of stack traces enabled for {}", getClass()
+					.getName());
 		}
 	}
 }

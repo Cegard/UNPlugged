@@ -23,14 +23,16 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.util.ObjectUtils;
 
 /**
- * Evaluation context class that adds a method parameters as SpEL
- * variables, in a lazy manner. The lazy nature eliminates unneeded
- * parsing of classes byte code for parameter discovery.
- *
- * <p>To limit the creation of objects, an ugly constructor is used
- * (rather then a dedicated 'closure'-like class for deferred execution).
- *
+ * Evaluation context class that adds a method parameters as SpEL variables, in
+ * a lazy manner. The lazy nature eliminates unneeded parsing of classes byte
+ * code for parameter discovery.
+ * 
+ * <p>
+ * To limit the creation of objects, an ugly constructor is used (rather then a
+ * dedicated 'closure'-like class for deferred execution).
+ * 
  * Based on package-scope org.springframework.cache.interceptor
+ * 
  * @author Costin Leau
  * @author Burt Beckwith
  */
@@ -43,7 +45,8 @@ public class LazyParamAwareEvaluationContext extends StandardEvaluationContext {
 	protected final Map<String, Method> methodCache;
 	protected boolean paramLoaded = false;
 
-	public LazyParamAwareEvaluationContext(Object rootObject, ParameterNameDiscoverer paramDiscoverer, Method method,
+	public LazyParamAwareEvaluationContext(Object rootObject,
+			ParameterNameDiscoverer paramDiscoverer, Method method,
 			Object[] args, Class<?> targetClass, Map<String, Method> methodCache) {
 		super(rootObject);
 
@@ -94,7 +97,8 @@ public class LazyParamAwareEvaluationContext extends StandardEvaluationContext {
 			setVariable("p" + i, args[i]);
 		}
 
-		String[] parameterNames = paramDiscoverer.getParameterNames(targetMethod);
+		String[] parameterNames = paramDiscoverer
+				.getParameterNames(targetMethod);
 		// save parameter names (if discovered)
 		if (parameterNames != null) {
 			for (int i = 0; i < parameterNames.length; i++) {

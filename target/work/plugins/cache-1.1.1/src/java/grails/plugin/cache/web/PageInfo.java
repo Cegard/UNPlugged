@@ -48,9 +48,10 @@ import org.springframework.web.servlet.FlashMap;
 
 /**
  * A Serializable representation of a {@link HttpServletResponse}.
- *
- * Based on net.sf.ehcache.constructs.web.PageInfo and grails.plugin.springcache.web.HeadersCategory.
- *
+ * 
+ * Based on net.sf.ehcache.constructs.web.PageInfo and
+ * grails.plugin.springcache.web.HeadersCategory.
+ * 
  * @author Adam Murdoch
  * @author Greg Luck
  * @author Rob Fletcher
@@ -59,7 +60,8 @@ import org.springframework.web.servlet.FlashMap;
 public class PageInfo implements Serializable {
 	private static final long serialVersionUID = 1;
 
-	protected static final Pattern PATTERN_CACHE_DIRECTIVE = Pattern.compile("([\\w-]+)(?:=(.+))?");
+	protected static final Pattern PATTERN_CACHE_DIRECTIVE = Pattern
+			.compile("([\\w-]+)(?:=(.+))?");
 	protected static final int FOUR_KB = 4196;
 	protected static final int GZIP_MAGIC_NUMBER_BYTE_1 = 31;
 	protected static final int GZIP_MAGIC_NUMBER_BYTE_2 = -117;
@@ -79,22 +81,28 @@ public class PageInfo implements Serializable {
 
 	/**
 	 * Creates a PageInfo object representing the "page".
-	 *
+	 * 
 	 * @param statusCode
 	 * @param contentType
 	 * @param cookies
 	 * @param body
-	 * @param storeGzipped set this to false for images and page fragments which should never
-	 * @param timeToLiveSeconds the time to Live in seconds. 0 means maximum, which is one year per RFC2616.
+	 * @param storeGzipped
+	 *            set this to false for images and page fragments which should
+	 *            never
+	 * @param timeToLiveSeconds
+	 *            the time to Live in seconds. 0 means maximum, which is one
+	 *            year per RFC2616.
 	 * @param headers
 	 * @param cookies
 	 * @param requestAttributes
 	 * @throws AlreadyGzippedException
 	 */
-	public PageInfo(final int statusCode, final String contentType, final byte[] body,
-	        boolean storeGzipped, long timeToLiveSeconds, final Collection<Header<? extends Serializable>> headers,
-	        @SuppressWarnings("unused") final Collection<Cookie> cookies,
-	        Map<String, Serializable> requestAttributes) throws AlreadyGzippedException {
+	public PageInfo(final int statusCode, final String contentType,
+			final byte[] body, boolean storeGzipped, long timeToLiveSeconds,
+			final Collection<Header<? extends Serializable>> headers,
+			@SuppressWarnings("unused") final Collection<Cookie> cookies,
+			Map<String, Serializable> requestAttributes)
+			throws AlreadyGzippedException {
 
 		if (headers != null) {
 			responseHeaders.addAll(headers);
@@ -116,18 +124,17 @@ public class PageInfo implements Serializable {
 				ungzippedBody = null;
 				if (isBodyParameterGzipped()) {
 					gzippedBody = body;
-				}
-				else {
+				} else {
 					gzippedBody = gzip(body);
 				}
-			}
-			else {
-				Assert.isTrue(!isBodyParameterGzipped(), "Non gzip content has been gzipped.");
+			} else {
+				Assert.isTrue(!isBodyParameterGzipped(),
+						"Non gzip content has been gzipped.");
 				ungzippedBody = body;
 			}
-		}
-		catch (IOException e) {
-			LoggerFactory.getLogger(getClass()).error("Error ungzipping gzipped body", e);
+		} catch (IOException e) {
+			LoggerFactory.getLogger(getClass()).error(
+					"Error ungzipping gzipped body", e);
 		}
 	}
 
@@ -136,33 +143,35 @@ public class PageInfo implements Serializable {
 	 * response as "never expires," an origin server sends an Expires date
 	 * approximately one year from the time the response is sent. HTTP/1.1
 	 * servers SHOULD NOT send Expires dates more than one year in the future.
-	 *
+	 * 
 	 * @param ttlSeconds
-	 *           accepts 0, which means eternal. If the time is 0 or > one year,
-	 *           it is set to one year in accordance with the RFC.
-	 *           <p/>
-	 *           Note: PageInfo does not hold a reference to the Element
-	 *           and therefore does not know what the Element ttl is. It would
-	 *           normally make most sense to set the TTL to the same as the
-	 *           element expiry.
+	 *            accepts 0, which means eternal. If the time is 0 or > one
+	 *            year, it is set to one year in accordance with the RFC.
+	 *            <p/>
+	 *            Note: PageInfo does not hold a reference to the Element and
+	 *            therefore does not know what the Element ttl is. It would
+	 *            normally make most sense to set the TTL to the same as the
+	 *            element expiry.
 	 */
 	protected void setTimeToLiveWithCheckForNeverExpires(long ttlSeconds) {
 		// 0 means eternal
 		if (ttlSeconds == 0 || ttlSeconds > ONE_YEAR_IN_SECONDS) {
 			timeToLiveSeconds = ONE_YEAR_IN_SECONDS;
-		}
-		else {
+		} else {
 			timeToLiveSeconds = ttlSeconds;
 		}
 	}
 
 	/**
-	 * @param ungzipped the bytes to be gzipped
+	 * @param ungzipped
+	 *            the bytes to be gzipped
 	 * @return gzipped bytes
 	 */
-	protected byte[] gzip(byte[] ungzipped) throws IOException, AlreadyGzippedException {
+	protected byte[] gzip(byte[] ungzipped) throws IOException,
+			AlreadyGzippedException {
 		if (isGzipped(ungzipped)) {
-			throw new AlreadyGzippedException("The byte[] is already gzipped. It should not be gzipped again.");
+			throw new AlreadyGzippedException(
+					"The byte[] is already gzipped. It should not be gzipped again.");
 		}
 		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
 		GZIPOutputStream gzipOutputStream = new GZIPOutputStream(bytes);
@@ -172,8 +181,9 @@ public class PageInfo implements Serializable {
 	}
 
 	/**
-	 * The response body will be assumed to be gzipped if the GZIP header has been set.
-	 *
+	 * The response body will be assumed to be gzipped if the GZIP header has
+	 * been set.
+	 * 
 	 * @return true if the body is gzipped
 	 */
 	protected boolean isBodyParameterGzipped() {
@@ -193,9 +203,11 @@ public class PageInfo implements Serializable {
 	 * <code>
 	 * >>14    beshort 0x677a          (gzipped)
 	 * </code>
-	 *
-	 * @param candidate the byte array to check
-	 * @return true if gzipped, false if null, less than two bytes or not gzipped
+	 * 
+	 * @param candidate
+	 *            the byte array to check
+	 * @return true if gzipped, false if null, less than two bytes or not
+	 *         gzipped
 	 */
 	public static boolean isGzipped(byte[] candidate) {
 		if (candidate == null || candidate.length < 2) {
@@ -212,7 +224,8 @@ public class PageInfo implements Serializable {
 	}
 
 	/**
-	 * @return the gzipped version of the body if the content is storeGzipped, otherwise null
+	 * @return the gzipped version of the body if the content is storeGzipped,
+	 *         otherwise null
 	 */
 	public byte[] getGzippedBody() {
 		return storeGzipped ? gzippedBody : null;
@@ -250,14 +263,17 @@ public class PageInfo implements Serializable {
 	/**
 	 * A highly performant ungzip implementation. Do not refactor this without
 	 * taking new timings. See ElementTest for timings
-	 *
-	 * @param gzipped the gzipped content
+	 * 
+	 * @param gzipped
+	 *            the gzipped content
 	 * @return an ungzipped byte[]
 	 * @throws IOException
 	 */
 	protected byte[] ungzip(final byte[] gzipped) throws IOException {
-		GZIPInputStream inputStream = new GZIPInputStream(new ByteArrayInputStream(gzipped));
-		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(gzipped.length);
+		GZIPInputStream inputStream = new GZIPInputStream(
+				new ByteArrayInputStream(gzipped));
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream(
+				gzipped.length);
 		byte[] buffer = new byte[FOUR_KB];
 		int bytesRead = 0;
 		while (bytesRead != -1) {
@@ -288,7 +304,7 @@ public class PageInfo implements Serializable {
 
 	/**
 	 * Returns true if the response is Ok.
-	 *
+	 * 
 	 * @return true if the response code is 200.
 	 */
 	public boolean isOk() {
@@ -304,7 +320,7 @@ public class PageInfo implements Serializable {
 
 	/**
 	 * The time to live in seconds.
-	 *
+	 * 
 	 * @return the time to live, or 0 if the wrapping element is eternal
 	 */
 	public long getTimeToLiveSeconds() {
@@ -318,7 +334,7 @@ public class PageInfo implements Serializable {
 	public String getHeader(String headerName) {
 		for (Header<? extends Serializable> header : responseHeaders) {
 			if (header.getName().equals(headerName)) {
-				return (String)header.getValue();
+				return (String) header.getValue();
 			}
 		}
 		return null;
@@ -332,18 +348,19 @@ public class PageInfo implements Serializable {
 
 		try {
 			return Long.valueOf(header);
-		}
-		catch (NumberFormatException e) {
+		} catch (NumberFormatException e) {
 			return httpDateFormatter.parseDateFromHttpDate(header).getTime();
 		}
 	}
 
 	/**
-	 * Returns true if the page's last-modified header indicates it is newer than
-	 * the copy held by the client as indicated by the request's if-modified-since header.
+	 * Returns true if the page's last-modified header indicates it is newer
+	 * than the copy held by the client as indicated by the request's
+	 * if-modified-since header.
 	 */
 	public boolean isModified(HttpServletRequest request) {
-		long ifModifiedSince = request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
+		long ifModifiedSince = request
+				.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
 		long lastModified = getDateHeader(HttpHeaders.LAST_MODIFIED);
 		if (ifModifiedSince == -1 || lastModified == -1) {
 			return true;
@@ -381,12 +398,10 @@ public class PageInfo implements Serializable {
 				if (StringUtils.hasLength(value)) {
 					try {
 						directives.put(name, Integer.valueOf(value));
-					}
-					catch (NumberFormatException e) {
+					} catch (NumberFormatException e) {
 						directives.put(name, value);
 					}
-				}
-				else {
+				} else {
 					directives.put(name, true);
 				}
 			}
@@ -394,7 +409,8 @@ public class PageInfo implements Serializable {
 		return directives;
 	}
 
-	protected void setCacheableRequestAttributes(Map<String, Serializable> attributes) {
+	protected void setCacheableRequestAttributes(
+			Map<String, Serializable> attributes) {
 		requestAttributes = new HashMap<String, Serializable>();
 
 		for (Map.Entry<String, Serializable> entry : attributes.entrySet()) {
@@ -412,7 +428,8 @@ public class PageInfo implements Serializable {
 			if (value instanceof ControllersApi) {
 				continue;
 			}
-			if (value instanceof PointcutAdvisor || value instanceof PointcutAdvisor[]) {
+			if (value instanceof PointcutAdvisor
+					|| value instanceof PointcutAdvisor[]) {
 				continue;
 			}
 			if (value instanceof Callback || value instanceof Callback[]) {

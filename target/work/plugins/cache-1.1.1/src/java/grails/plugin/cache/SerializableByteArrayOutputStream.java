@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 
 /**
  * A Serializable version of java.io.ByteArrayOutputStream.
- *
+ * 
  * @author Burt Beckwith
  */
 public class SerializableByteArrayOutputStream extends SerializableOutputStream {
@@ -47,14 +47,14 @@ public class SerializableByteArrayOutputStream extends SerializableOutputStream 
 		if (newcount > buf.length) {
 			buf = copyOf(Math.max(buf.length << 1, newcount));
 		}
-		buf[count] = (byte)b;
+		buf[count] = (byte) b;
 		count = newcount;
 	}
 
 	@Override
 	public synchronized void write(byte[] b, int off, int len) {
-		if ((off < 0) || (off > b.length) || (len < 0) ||
-				((off + len) > b.length) || ((off + len) < 0)) {
+		if ((off < 0) || (off > b.length) || (len < 0)
+				|| ((off + len) > b.length) || ((off + len) < 0)) {
 			throw new IndexOutOfBoundsException();
 		}
 
@@ -82,11 +82,12 @@ public class SerializableByteArrayOutputStream extends SerializableOutputStream 
 		return copyOf(count);
 	}
 
-	// ByteArrayOutputStream uses Arrays.copyOf which is only in Java 6, that's inlined here.
+	// ByteArrayOutputStream uses Arrays.copyOf which is only in Java 6, that's
+	// inlined here.
 	protected byte[] copyOf(int newLength) {
-      byte[] copy = new byte[newLength];
-      System.arraycopy(buf, 0, copy, 0, Math.min(buf.length, newLength));
-      return copy;
+		byte[] copy = new byte[newLength];
+		System.arraycopy(buf, 0, copy, 0, Math.min(buf.length, newLength));
+		return copy;
 	}
 
 	public synchronized int size() {
@@ -98,7 +99,8 @@ public class SerializableByteArrayOutputStream extends SerializableOutputStream 
 		return new String(buf, 0, count);
 	}
 
-	public synchronized String toString(String charsetName) throws UnsupportedEncodingException {
+	public synchronized String toString(String charsetName)
+			throws UnsupportedEncodingException {
 		return new String(buf, 0, count, charsetName);
 	}
 

@@ -6,7 +6,6 @@ class Video {
 	def String lugar
 	def String titulo
 	def String ofrecidoPor
-	def boolean enVivo
 	
 	def Usuario uploader
 	def ClaseEvento claseEvento

@@ -25,8 +25,9 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.util.StringUtils;
 
 /**
- * Based on org.springframework.cache.interceptor.CacheAspectSupport.CacheOperationContext
- *
+ * Based on org.springframework.cache.interceptor.CacheAspectSupport.
+ * CacheOperationContext
+ * 
  * @author Costin Leau
  * @author Juergen Hoeller
  * @author Chris Beams
@@ -44,9 +45,10 @@ public class CacheOperationContext {
 	protected final EvaluationContext evalContext;
 	protected final HttpServletRequest request;
 
-	public CacheOperationContext(CacheOperation operation, Method method, Object[] args,
-			Class<?> targetClass, Collection<Cache> caches, ExpressionEvaluator evaluator,
-			WebKeyGenerator keyGenerator, HttpServletRequest request) {
+	public CacheOperationContext(CacheOperation operation, Method method,
+			Object[] args, Class<?> targetClass, Collection<Cache> caches,
+			ExpressionEvaluator evaluator, WebKeyGenerator keyGenerator,
+			HttpServletRequest request) {
 		this.operation = operation;
 		this.caches = caches;
 		this.method = method;
@@ -54,19 +56,21 @@ public class CacheOperationContext {
 		this.keyGenerator = keyGenerator;
 		this.request = request;
 
-		evalContext = evaluator.createEvaluationContext(caches, method, args, targetClass);
+		evalContext = evaluator.createEvaluationContext(caches, method, args,
+				targetClass);
 	}
 
 	protected boolean isConditionPassing() {
 		if (StringUtils.hasText(operation.getCondition())) {
-			return evaluator.condition(operation.getCondition(), method, evalContext);
+			return evaluator.condition(operation.getCondition(), method,
+					evalContext);
 		}
 		return true;
 	}
 
 	/**
 	 * Computes the key for the given caching operation.
-	 *
+	 * 
 	 * @return generated key (null if none can be generated)
 	 */
 	protected Object generateKey() {

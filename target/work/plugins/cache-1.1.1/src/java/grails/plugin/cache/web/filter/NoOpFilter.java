@@ -26,14 +26,16 @@ import org.springframework.web.filter.GenericFilterBean;
 
 /**
  * Based on grails.plugin.springcache.web.NoOpFilter.
- *
+ * 
  * @author Rob Fletcher
  * @author Burt Beckwith
  */
 public class NoOpFilter extends GenericFilterBean {
 
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-        ((HttpServletResponse)response).addHeader(PageFragmentCachingFilter.X_CACHED, "disabled");
-        chain.doFilter(request, response);
-    }
+	public void doFilter(ServletRequest request, ServletResponse response,
+			FilterChain chain) throws IOException, ServletException {
+		((HttpServletResponse) response).addHeader(
+				PageFragmentCachingFilter.X_CACHED, "disabled");
+		chain.doFilter(request, response);
+	}
 }

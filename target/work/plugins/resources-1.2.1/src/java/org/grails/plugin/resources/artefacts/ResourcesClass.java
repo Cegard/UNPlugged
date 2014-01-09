@@ -5,4 +5,5 @@ import org.codehaus.groovy.grails.commons.GrailsClass;
 /**
  * @author Luke Daley (ld@ldaley.com)
  */
-public interface ResourcesClass extends GrailsClass {}
+public interface ResourcesClass extends GrailsClass {
+}

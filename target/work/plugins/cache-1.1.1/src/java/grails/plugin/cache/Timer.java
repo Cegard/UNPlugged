@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Based on grails.plugin.springcache.web.Timer.
- *
+ * 
  * @author Rob Fletcher
  * @author Burt Beckwith
  */
@@ -43,8 +43,8 @@ public class Timer {
 	public void stop(boolean cached) {
 		if (log.isInfoEnabled()) {
 			stopWatch.stop();
-			log.info("{} request for {} took {}",
-					new Object[] { cached ? "Cached" : "Uncached", uri, stopWatch });
+			log.info("{} request for {} took {}", new Object[] {
+					cached ? "Cached" : "Uncached", uri, stopWatch });
 		}
 	}
 }

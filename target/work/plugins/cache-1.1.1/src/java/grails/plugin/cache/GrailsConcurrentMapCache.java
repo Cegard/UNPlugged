@@ -20,15 +20,17 @@ import java.util.concurrent.ConcurrentMap;
 import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 /**
- * Extends the default implementation to return GrailsValueWrapper instances instead of
- * SimpleValueWrapper. This isn't useful for this implementation but is for others where
- * the native wrapper has more useful information that would otherwise be lost (for example
- * the TTL in the Ehcache Element class). This implementation exists so that all caches
- * consistently return a GrailsValueWrapper.
- *
+ * Extends the default implementation to return GrailsValueWrapper instances
+ * instead of SimpleValueWrapper. This isn't useful for this implementation but
+ * is for others where the native wrapper has more useful information that would
+ * otherwise be lost (for example the TTL in the Ehcache Element class). This
+ * implementation exists so that all caches consistently return a
+ * GrailsValueWrapper.
+ * 
  * @author Burt Beckwith
  */
-public class GrailsConcurrentMapCache extends ConcurrentMapCache implements GrailsCache {
+public class GrailsConcurrentMapCache extends ConcurrentMapCache implements
+		GrailsCache {
 
 	public GrailsConcurrentMapCache(String name) {
 		super(name);
@@ -38,14 +40,16 @@ public class GrailsConcurrentMapCache extends ConcurrentMapCache implements Grai
 		super(name, allowNullValues);
 	}
 
-	public GrailsConcurrentMapCache(String name, ConcurrentMap<Object, Object> store, boolean allowNullValues) {
+	public GrailsConcurrentMapCache(String name,
+			ConcurrentMap<Object, Object> store, boolean allowNullValues) {
 		super(name, store, allowNullValues);
 	}
 
 	@Override
 	public GrailsValueWrapper get(Object key) {
 		Object value = getNativeCache().get(key);
-		return value == null ? null : new GrailsValueWrapper(fromStoreValue(value), null);
+		return value == null ? null : new GrailsValueWrapper(
+				fromStoreValue(value), null);
 	}
 
 	@SuppressWarnings("unchecked")

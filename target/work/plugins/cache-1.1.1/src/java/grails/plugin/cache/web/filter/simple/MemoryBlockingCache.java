@@ -24,14 +24,16 @@ import org.springframework.cache.concurrent.ConcurrentMapCache;
 
 /**
  * In-memory-based implementation of BlockingCache.
- *
+ * 
  * @author Burt Beckwith
  */
-public class MemoryBlockingCache extends ConcurrentMapCache implements BlockingCache {
+public class MemoryBlockingCache extends ConcurrentMapCache implements
+		BlockingCache {
 
 	protected final CacheConfiguration cacheConfiguration = new MemoryCacheConfiguration();
 
-	public MemoryBlockingCache(String name, ConcurrentMap<Object, Object> store, boolean allowNullValues) {
+	public MemoryBlockingCache(String name,
+			ConcurrentMap<Object, Object> store, boolean allowNullValues) {
 		super(name, store, allowNullValues);
 	}
 

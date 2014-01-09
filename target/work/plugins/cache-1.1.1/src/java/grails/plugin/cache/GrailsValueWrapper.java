@@ -17,8 +17,9 @@ package grails.plugin.cache;
 import org.springframework.cache.support.SimpleValueWrapper;
 
 /**
- * Extends the standard implementation to also include the native wrapper instance.
- *
+ * Extends the standard implementation to also include the native wrapper
+ * instance.
+ * 
  * @author Burt Beckwith
  */
 public class GrailsValueWrapper extends SimpleValueWrapper {

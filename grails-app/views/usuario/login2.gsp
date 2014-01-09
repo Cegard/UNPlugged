@@ -5,11 +5,16 @@
 <title>Untitled Document</title>
 <style type="text/css">
 body {
-	background-color: #171C18;
+	background-image: url(../images/tire.png);
+	background-repeat:repeat-y;
+	padding-left: 0.3cm;
 }
 body,td,th {
+	font-size: 14px;
+	color: #FFF;
+}
+a:link {
 	color: #666;
-	font-size: 16px;
 }
 </style>
 <link href="jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
@@ -20,12 +25,24 @@ body,td,th {
 </head>
 
 <body>
-    <p style="color: #FFF; font-size: 24px;"><strong>|| Inicio</strong></p>
-    <form name="autentication" action="autenticar">
-        Nombre <input id="nombre" type="text" required="required" name="nombre"/> <br/>
-        Contrase&ntildea <input id="pass" type="password" required="required" name="password"/> <br/>
+
+   <p style="background-image:url(../images/table.png);background-repeat:no-repeat;color: #FFF; font-size: 14px;"><strong>.Inicio</strong></p>
+    <form name="autentication" action="authenticate">
+        <input size="15" id="nombre" type="text" required="required" name="nombre" placeholder="Usuario"/> <br/>
+        <input size="15" id="pass" type="password" required="required" name="password" placeholder='Contraseña' /> <br/>
 	<br/>
-	<input type="submit" name="login" value="Entrar" />
+	<input style="background: -webkit-gradient(linear,left top,left bottom,from(#66B3B6),to(#375A87));
+background: -moz-linear-gradient(top,#8266b6,#533787);
+background: -o-linear-gradient(top,#8266b6,#533787);
+background: linear-gradient(top,#8266b6,#533787);
+border-top: 1px solid #5b3f8f;
+border-left: 1px solid #412771;
+border-right: 1px solid #412771;
+border-bottom: 1px solid #2a1453;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.15);
+-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.15);
+-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.15);
+color: #fff;" type="submit" name="login" value="Entrar" />
     </form>
 </body>
 </html>

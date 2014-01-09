@@ -18,7 +18,7 @@ import grails.plugin.cache.CacheConfiguration;
 
 /**
  * In-memory-based implementation of CacheConfiguration.
- *
+ * 
  * @author Burt Beckwith
  */
 public class MemoryCacheConfiguration implements CacheConfiguration {

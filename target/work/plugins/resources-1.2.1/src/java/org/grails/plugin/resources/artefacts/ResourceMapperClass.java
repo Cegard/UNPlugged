@@ -5,4 +5,5 @@ import org.codehaus.groovy.grails.commons.GrailsClass;
 /**
  * @author Luke Daley (ld@ldaley.com)
  */
-public interface ResourceMapperClass extends GrailsClass {}
+public interface ResourceMapperClass extends GrailsClass {
+}

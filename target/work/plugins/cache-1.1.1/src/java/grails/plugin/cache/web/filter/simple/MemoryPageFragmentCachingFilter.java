@@ -23,25 +23,27 @@ import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 
 /**
  * In-memory-based implementation of PageFragmentCachingFilter.
- *
+ * 
  * @author Burt Beckwith
  */
 public class MemoryPageFragmentCachingFilter extends PageFragmentCachingFilter {
 
-//	@Override
-//	protected void replaceCacheWithDecoratedCache(Cache cache, BlockingCache blocking) {
-//		// TODO
-//		getNativeCacheManager().replaceCacheWithDecoratedCache(
-//				(Ehcache)cache.getNativeCache(), (Ehcache)blocking.getNativeCache());
-//	}
+	// @Override
+	// protected void replaceCacheWithDecoratedCache(Cache cache, BlockingCache
+	// blocking) {
+	// // TODO
+	// getNativeCacheManager().replaceCacheWithDecoratedCache(
+	// (Ehcache)cache.getNativeCache(), (Ehcache)blocking.getNativeCache());
+	// }
 
-//	@SuppressWarnings({ "cast", "unchecked" })
-//	@Override
-//	protected BlockingCache createBlockingCache(Cache c) {
-//		ConcurrentMapCache cache = (ConcurrentMapCache)c;
-//		return new MemoryBlockingCache(cache.getName(),
-//				(ConcurrentMap<Object, Object>)cache.getNativeCache(), cache.isAllowNullValues());
-//	}
+	// @SuppressWarnings({ "cast", "unchecked" })
+	// @Override
+	// protected BlockingCache createBlockingCache(Cache c) {
+	// ConcurrentMapCache cache = (ConcurrentMapCache)c;
+	// return new MemoryBlockingCache(cache.getName(),
+	// (ConcurrentMap<Object, Object>)cache.getNativeCache(),
+	// cache.isAllowNullValues());
+	// }
 
 	@Override
 	protected int getTimeToLive(ValueWrapper wrapper) {
@@ -51,11 +53,12 @@ public class MemoryPageFragmentCachingFilter extends PageFragmentCachingFilter {
 
 	@Override
 	protected ConcurrentMapCacheManager getNativeCacheManager() {
-		return (ConcurrentMapCacheManager)super.getNativeCacheManager();
+		return (ConcurrentMapCacheManager) super.getNativeCacheManager();
 	}
 
 	@Override
-	protected void put(Cache cache, String key, PageInfo pageInfo, Integer timeToLiveSeconds) {
+	protected void put(Cache cache, String key, PageInfo pageInfo,
+			Integer timeToLiveSeconds) {
 		// TTL isn't supported in the in-memory implementation
 		cache.put(key, pageInfo);
 	}
