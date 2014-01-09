@@ -45,25 +45,28 @@ class VideoController {
 	 */
 	def listar = {
 		
-		def paraTransmitir = flash.paraTransmitir as Set
-		def paraVer = flash.paraVer as Set
 		def toSee = [] as Set
 		def toStream = [] as Set
 		def streamClases = [] as Set
 		
-		/* obteniendo la lista de las materias y eventos en los cuales el usuario tiene permiso
-		 * de iniciar transmiciones*/
-		if (!paraTransmitir.isEmpty())
-			toStream = ClaseEvento.find{codigo in flash.paraTransmitir} //?
-		
-		/*obteniendo la lista de vídeos de las clases a las cuales pertenece el usuario que están transmitiendo*/
-		streamClases = Video.find{claseEvento.codigo in paraVer}
+		if (session.actual){
+
+			def paraTransmitir = flash.paraTransmitir
+			def paraVer = flash.paraVer
+			
+			/* obteniendo la lista de las materias y eventos en los cuales el usuario tiene permiso
+			 * de iniciar transmiciones*/
+			toStream = ClaseEvento.list().each{it.codigo in paraTransmitir} //?
+
+			/*obteniendo la lista de vídeos de las clases a las cuales pertenece el usuario que están transmitiendo*/
+			streamClases = Video.list().each{it.claseEvento.codigo in paraVer}
+		}
 		
 		/*añadiendo los eventos tranasmitiendo en vivo*/
-		toSee = streamClases + Video.find{(claseEvento.tipo == "evento") && enVivo}
+		toSee = streamClases + Video.list().each{(it.claseEvento.tipo == "evento") && (it.enVivo == true)}
 		
 		/*todos los vídeos almacenados en el servidor que no estén siendo transmitidos en vivo*/
-		flash.videos = Video.find{enVivo == false}
+		flash.videos = Video.list().each{it.enVivo == false}
 		
 		flash.toStream = toStream
 		flash.toSee = toSee
