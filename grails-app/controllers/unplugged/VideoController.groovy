@@ -2,6 +2,14 @@ package unplugged
 
 class VideoController {
 	
+	def fme = {
+		
+	}
+	
+	def bigv = {
+		
+	}
+	
     def iniciarStreaming = {
 	}
 	

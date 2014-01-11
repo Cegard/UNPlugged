@@ -1,24 +1,26 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <style type="text/css">
 body {
-	background-color: #171C18;
+	background-image: url(../images/tire.png);
+	background-repeat:repeat-y;
+	padding-left: 0.3cm;
 }
 body,td,th {
-	font-size: 18px;
+	font-size: 14px;
 	color: #FFF;
 }
 a:link {
 	color: #666;
 }
 </style>
+<title>Untitled Document</title>
 </head>
 
 <body>
-<p style="font-size: 24px; font-weight: bolder;">|| Explorar</p>
+<p style="background-image:url(../images/table.png);background-repeat:no-repeat;color: #FFF; font-size: 14px;"><strong>.Explorar</strong></p>
 <p><a href="canales.gsp" target="FramePrincipal">Cursos</a></p>
 <p><a href="#">Videos</a></p>
 <p><a href="#">Canales</a></p>

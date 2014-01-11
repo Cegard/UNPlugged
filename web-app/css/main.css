@@ -11,13 +11,11 @@ h1, h2, h3, h4, h5, h6 {
 /* BASE LAYOUT */
 
 html {
-	background-color: #ddd;
-	background-image: -moz-linear-gradient(center top, #aaa, #ddd);
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #aaa), color-stop(1, #ddd));
-	background-image: linear-gradient(top, #aaa, #ddd);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorStr = '#aaaaaa', EndColorStr = '#dddddd');
-	background-repeat: no-repeat;
 	height: 100%;
+	background-image: url(../images/fondo.jpg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-attachment:fixed;
 	/* change the box model to exclude the padding from the calculation of 100% height (IE8+) */
 	-webkit-box-sizing: border-box;
 	   -moz-box-sizing: border-box;
@@ -25,7 +23,8 @@ html {
 }
 
 html.no-cssgradients {
-	background-color: #aaa;
+	background-color: #202020;
+	opacity: 0.9;
 }
 
 .ie6 html {
@@ -37,25 +36,39 @@ html * {
 }
 
 body {
-	background: #ffffff;
-	color: #333333;
+	background-color: #202020;
+	opacity: 0.9;
 	margin: 0 auto;
+	color: #656565;
 	max-width: 960px;
+	position:relative;
+	border-color: #156762;
+	border-style: solid;
+	border-width: 0 1px;
+	padding-left: 0.2cm;
 	overflow-x: hidden; /* prevents box-shadow causing a horizontal scrollbar in firefox when viewport < 960px wide */
-	   -moz-box-shadow: 0 0 0.3em #255b17;
-	-webkit-box-shadow: 0 0 0.3em #255b17;
-	        box-shadow: 0 0 0.3em #255b17;
+	   -moz-box-shadow: 0 0 0.3em #006666;
+	-webkit-box-shadow: 0 0 0.3em #006666;
+	        box-shadow: 0 0 0.3em #006666;
 }
 
+.logo {
+	
+	
+}
 #grailsLogo {
 	background-color: #abbf78;
 }
-
+.item-container .item {
+text-align: center;
+}
+.item-container{width:182px;display:inline-block;vertical-align:top;}
+.item-info{padding-top:10px;} .item-container .item-info a{color:#a5a5a5;font-size:10px;}.broadcast .item-container .item-info p{color:#777;margin-top:5px;}
 /* replace with .no-boxshadow body if you have modernizr available */
 .ie6 body,
 .ie7 body,
 .ie8 body {
-	border-color: #255b17;
+	border-color: #156762;
 	border-style: solid;
 	border-width: 0 1px;
 }
@@ -65,7 +78,7 @@ body {
 }
 
 a:link, a:visited, a:hover {
-	color: #48802c;
+	color: #fff;
 }
 
 a:hover, a:active {
@@ -73,7 +86,7 @@ a:hover, a:active {
 }
 
 h1 {
-	color: #48802c;
+	color: #156762;
 	font-weight: normal;
 	font-size: 1.25em;
 	margin: 0.8em 0 0.3em 0;
@@ -108,7 +121,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #44d1c9;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;
@@ -522,21 +535,50 @@ th:hover, tr:hover {
 /* ACTION BUTTONS */
 
 .buttons {
-	background-color: #efefef;
-	overflow: hidden;
-	padding: 0.3em;
-	   -moz-box-shadow: 0 0 3px 1px #aaaaaa;
-	-webkit-box-shadow: 0 0 3px 1px #aaaaaa;
-	        box-shadow: 0 0 3px 1px #aaaaaa;
-	margin: 0.1em 0 0 0;
-	border: none;
+position: relative;
 }
+.item-container .item .buttons {
+background: #000;
+border: 1px solid #00cccc;
+padding: 4px 0;
+}
+.primary_button {
+background: -webkit-gradient(linear,left top,left bottom,from(#66B3B6),to(#375A87));
+background: -moz-linear-gradient(top,#8266b6,#533787);
+background: -o-linear-gradient(top,#8266b6,#533787);
+background: linear-gradient(top,#8266b6,#533787);
+border-top: 1px solid #5b3f8f;
+border-left: 1px solid #412771;
+border-right: 1px solid #412771;
+border-bottom: 1px solid #2a1453;
+box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.15);
+-moz-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.15);
+-webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),0 1px 0 rgba(0,0,0,0.15);
+color: #fff;
+}
+.normal_button {
+background: -webkit-gradient(linear,left top,left bottom,from(#7b8180),to(#153436));
+background: -moz-linear-gradient(top,#f5f5f5,#ddd);
+background: -o-linear-gradient(top,#f5f5f5,#ddd);
+background: linear-gradient(top,#f5f5f5,#ddd);
+border-top: 1px solid rgba(0,0,0,0.2);
+border-left: 1px solid rgba(0,0,0,0.3);
+border-right: 1px solid rgba(0,0,0,0.3);
+border-bottom: 1px solid rgba(0,0,0,0.35);
+box-shadow: inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,0.07);
+-moz-box-shadow: inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,0.07);
+-webkit-box-shadow: inset 0 1px 0 #fff,0 1px 0 rgba(0,0,0,0.07);
+text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+-moz-text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+-webkit-text-shadow: 0 1px 0 rgba(255,255,255,0.75);
+color: #666;
+}
+
 
 .buttons input,
 .buttons a {
 	background-color: transparent;
 	border: 0;
-	color: #666666;
 	cursor: pointer;
 	display: inline-block;
 	margin: 0 0.25em 0;
@@ -551,7 +593,6 @@ th:hover, tr:hover {
 
 .buttons input:hover, .buttons input:focus,
 .buttons a:hover, .buttons a:focus {
-	background-color: #999999;
 	color: #ffffff;
 	outline: none;
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);

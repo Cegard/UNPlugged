@@ -2,7 +2,19 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta name="layout" content="main"/>
+	<style type="text/css">
+body {
+	background-image: url(../images/tire.png);
+	background-repeat:repeat-y;
+}
+body,td,th {
+	font-size: 18px;
+	color: #FFF;
+}
+a:link {
+	color: #666;
+}
+</style>
 	<title>Autenticaci&oacuten</title>
 </head>
 
