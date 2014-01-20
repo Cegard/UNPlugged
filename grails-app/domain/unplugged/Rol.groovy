@@ -2,13 +2,17 @@ package unplugged
 
 class Rol {
 	
-	def String tipo
+	def String rol
 	
 	def Usuario persona
 	def ClaseEvento claseEvento
 	
 	static belongsTo = [Usuario, ClaseEvento]
 	
-    static constraints = {
-    }
+        static constraints = {
+        }
+        
+        def String toString(){
+                "${this.rol}"
+        }
 }
