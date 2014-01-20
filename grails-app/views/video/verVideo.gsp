@@ -29,13 +29,10 @@
 	</object>
   </div>
     Deja un Comentario <br/>
-<<<<<<< HEAD
     <input type="text" name="comentario" /> <br/>
     <input type="button" name="buttonComent" value="enviar" onclick="comentar()" /> <br />
     <input type="hidden" name="vidID" value="${flash.vID}" />
-=======
     <input type="text" name="comentar">
->>>>>>> c5f691a41b35fd134ae8d3501c176f22ca6cca8c
   <div>
   <%--se mostraran los comentarios de manera dinámica --%>
   </div>
