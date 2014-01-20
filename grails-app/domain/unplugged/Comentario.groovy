@@ -3,7 +3,7 @@ package unplugged
 class Comentario {
 
 	def Date fecha
-	def String path
+	def String contenido
 	
 	def Video video
 	def Usuario usuario

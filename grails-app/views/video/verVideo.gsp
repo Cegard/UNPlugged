@@ -4,6 +4,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="layout" content="main"/>
 <title><% out << "${flash.tittle }" %></title>
+
+<% def comentar() {
+	coment.video = Video.findById(flash.vID)
+	coment.usuario = session.actual
+	coment.fecha = new Date()
+	coment.contenido = params.comentario
+	
+	coment.save() // ?
+}%>
+
+
 </head>
 <body>
   
@@ -20,7 +31,9 @@
 	</object>
   </div>
     Deja un Comentario <br/>
-    <input type="text" name="comentar">
+    <input type="text" name="comentario" /> <br/>
+    <input type="button" name="buttonComent" value="enviar" onclick="comentar()" /> <br />
+    <input type="hidden" name="vidID" value="${flash.vID}" />
   <div>
   <%--se mostraran los comentarios de manera dinámica --%>
   </div>

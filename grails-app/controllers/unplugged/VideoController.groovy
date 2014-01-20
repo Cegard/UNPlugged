@@ -103,6 +103,7 @@ class VideoController {
 		
 		flash.tittle = video.titulo
 		flash.path = "localhost/vod/mp4:${codCE}_${codUp}_${video.titulo}.f4v"
+		flash.vID = video.id
 		
 		if (!video.enVivo)
 			redirect(action:"verVideo")

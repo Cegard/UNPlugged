@@ -2,5 +2,5 @@ package unplugged
 
 class ComentarioController {
 
-    def index() { }
+    def index = { }
 }
