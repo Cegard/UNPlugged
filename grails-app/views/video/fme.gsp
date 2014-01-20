@@ -2,7 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<<<<<<< HEAD
 <meta name="layout" content="main"/> 
+=======
+<meta name="layout" content="layout1"/> 
+>>>>>>> c5f691a41b35fd134ae8d3501c176f22ca6cca8c
 <title>Flash Media Live Encoder Guía de uso</title>
 </head>
 <body>

@@ -1,36 +1,34 @@
 package unplugged
 
 class VideoController {
-	
-	def fme = {
+
+    def fme = {
 		
-	}
+    }
 	
-	def bigv = {
+    def bigv = {
 		
-	}
+    }
 	
     def iniciarStreaming = {
-	}
+    }
 	
 	
-	def verStreaming = {
-	}
+    def verStreaming = {
+    }
 	
+    def verVideo = { 
+    }
 	
-	def verVideo = { 
-	}
-	
-	
-	def procesar = {
+    def procesar = {
 		
 		def codigosProfesorEncargado = [] as Set // Almacenará los códigos de las clases o eventos
 												 // en las que el usuario tiene rol de profesor o encargado.
 		
 		def codigosEstudiante = [] as Set // Almacenará los códigos de las clases donde el usuario tenga rol
-										  // de estudiante.
 		
 		flash.rolesActual.each {
+		/*flash.rolesActual.each {
 			
 			def rol = (Rol) it
 			
@@ -39,7 +37,15 @@ class VideoController {
 			else
 				codigosEstudiante.add(rol.claseEvento.codigo)
 		}
-		
+		}*/
+                def Rol rol = flash.rolesActual
+                if(rol.rol.equals("profesor") || rol.rol.equals("encargado")){
+                    codigosProfesorEncargado.add(rol.claseEvento.codigo)
+                }
+                else{
+                    codigosEstudiante.add(rol.claseEvento.codigo)
+                }
+				
 		flash.paraTransmitir = codigosProfesorEncargado
 		flash.paraVer = codigosEstudiante
 	}
@@ -109,6 +115,7 @@ class VideoController {
 			redirect(action:"verVideo")
 		else
 			redirect(action:"verStreaming")
+		}
 	}
-	
 }
+

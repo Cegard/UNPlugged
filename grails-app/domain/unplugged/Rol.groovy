@@ -8,7 +8,6 @@ class Rol {
 	def ClaseEvento claseEvento
 	
 	static belongsTo = [Usuario, ClaseEvento]
-	
     static constraints = {
     }
 	
