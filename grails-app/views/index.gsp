@@ -23,23 +23,6 @@
 				display: inline; /* float double margin fix http://www.positioniseverything.net/explorer/doubled-margin.html */
 			}
 
-<<<<<<< HEAD
-<html>
-    <head>
-        <meta charset="utf-8">
-        <title>UNPlugged Index</title>
-    </head>
-    
-    <FRAMESET cols="12%, 88%"  >
-        <FRAMESET rows="126,266" cols="*" bordercolor="#000">
-            <FRAME src="Usuario.gsp" name="Login" noresize scrolling="no"/>
-            <FRAME src="NavPanel.gsp" name="NavPanel" noresize scrolling="no"/>
-    </FRAMESET>
-
-    <FRAME src="Frame.gsp" name="FramePrincipal"/>
-  
-</html>
-=======
 			#status ul {
 				font-size: 0.9em;
 				list-style-type: none;
@@ -66,7 +49,6 @@
 				margin-bottom: 0.3em;
 				font-size: 1em;
 			}
->>>>>>> c5f691a41b35fd134ae8d3501c176f22ca6cca8c
 
 			p {
 				line-height: 1.5;

@@ -2,28 +2,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="layout" content="main"/>
 <meta name="layout" content="layout1"/>
 <title>Bienvenido</title>
 </head>
 <body>
-  <div class="body">
+
+    <div id="centro" align="center">
 	
-	<%-- if(!flash.toStream.isEmpty()) { %>
-		<p> <h2> iniciar Streaming de </h2> </p>
-		<% flash.toStream.each{ %>
-			
+	<% if(!toStream.isEmpty()) { %>
+		<p> <h2> Iniciar Streaming de </h2> </p>
+		<% toStream.each{ %>
+			<p> <a href="iniciarStreaming?ce_id=${it.id}" rel="next"> ${it.nombre} </a> </p>
 		<% } %> 
-	<% }  --%>
+	<% } %>
 	
-	<% if(!flash.toSee.isEmpty()) { %>
-		<p> <h2> Transmiciones en vivo </h2> </p>
-		<% flash.toSee.each{ %>
+	<% if(!toSee.isEmpty()) { %>
+		<p> <h2> Transmisiones en vivo </h2> </p>
+		<% toSee.each{ %>
 			<p> <a href="procesarSolicitud?v_id=${it.id}" rel="next"> ${it.titulo} </a> </p>
-		<% } %> 
+	    <% } %>
 	<% }  %>
 	
-    <% flash.videos.each{ %>
+	<p> <h2> Videoteca </h2> </p>
+    <% videos.each{ %>
 		<p> <a href="procesarSolicitud?v_id=${it.id}" rel="next"> ${it.titulo} </a> </p>
     <% } %>
     

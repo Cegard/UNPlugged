@@ -8,26 +8,6 @@
 </head>
 <body>
 
-    <div id="izquierda">
-    <div aling="left">
-                <p style="color: #FFF; font-size: 24px;"><strong>|| Inicio</strong></p>
-                <form name="autentication" action="authenticate">
-                Nombre <br> <input id="nombre" type="text" required="required" name="nombre"/> <br/>
-                Contrase&ntildea <br> <input id="pass" type="password" required="required" name="password"/> <br/>
-                <br/>
-                <input type="submit" name="login" value="Entrar" />
-                </form>
-    </div>
-    
-    <div aling="left">
-               <p>&nbsp;</p>
-               <p style="font-size: 24px; font-weight: bolder;">|| Explorar</p>
-               <p><a href="#">Cursos</a></p>
-               <p><a href="#">Videos</a></p>
-               <p><a href="#">Canales</a></p>
-    </div>
-    </div>
-        
     <div id="centro" align="center">
             <p>&nbsp;</p>
             <p>

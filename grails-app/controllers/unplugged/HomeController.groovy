@@ -10,9 +10,10 @@ package unplugged
  *
  * @author Alexander
  */
-class HomeController {
-    def Video videoBuscado;
-    def Rol rolActual;
+class HomeController{
+    
+    
+    def Rol rolActual
     
     def index={
         redirect(action: "home")
@@ -20,19 +21,41 @@ class HomeController {
     
     def home={}
     
+    def cursos={
+        [cursos:ClaseEvento.list(), videos: Video.list()]
+    }
+    
+    def Videos ={
+        [videos: Video.list()]
+    }
+    
+    def login2 ={
+        def Usuario user = Usuario.findByNombreUsuarioAndPassword(chainModel["username"],chainModel["keyword"])
+        
+        if (user){
+
+                session.actual = user
+                preparar.call()
+        }
+        else{                        
+                flash.message = "El Usuario ${chainModel["username"]} no se encuentra registrado"
+                redirect(action:"home")
+        }
+    }
+    
     def authenticate={
 		
-		def Usuario user = Usuario.findByNombreUsuarioAndPassword(params.nombre, params.password)
-		
-		if (user){
-			
-			session.actual = user
-			preparar.call()
-		}
-		else{
-			flash.message = "usuario ${params.nombre} no se encuentra registrado"
-                        redirect(action:"home")
-		}
+        def Usuario user = Usuario.findByNombreUsuarioAndPassword(params.nombre, params.password)
+
+        if (user){
+
+                session.actual = user
+                preparar.call()
+        }
+        else{                        
+                flash.message = "usuario ${params.nombre} no se encuentra registrado"
+                redirect(action:"home")
+        }
 		
     }
     
@@ -42,52 +65,93 @@ class HomeController {
         }
         
         def roles = [] as Set // se escoge un set, ya que se acomoda y se facilita más su uso
+		def cods = [] as Set
 		
-	// se capturan los roles del usuario que ingreso en la página
-	/*Rol.list().each{
-            if (it.persona.id == session.actual.id)
-                roles.add(it)
-	}*/
+		Rol.list().each{
+			if(it.persona.id == session.actual.id){
+				cods.add(it.id)
+			}
+        }
 
-	flash.rolesActual = Rol.find{persona.id == session.actual.id}
-        rolActual=flash.rolesActual
-	redirect(controller: "video", action:"procesar")
-	}
-    
-    def logged={
-        [rolActual:rolActual]
+	chain(controller:"video", action:"listar", model: [rols: cods])
     }
 	
     def logout={
         session.actual=null
-        redirect(action:"home")
-        
+        redirect(action:"home")        
     }
     
-    def checkLogged={
-        if(session.actual==null){
-            redirect(action:"home")
+    def buscarDos={
+        def videoList=[] as Set
+        def String text = chainModel["text"]
+        def String opcion = chainModel["opcion"]
+        
+        if(opcion=="1"){
+           videoList = videoList + Video.list().each{if(it.titulo==text)
+			   it
+		   } 
+        }
+        if(opcion=="2"){
+            videoList = videoList + Video.list().each{if(it.titulo==text)
+				it
+			}            
+        }
+        if(opcion=="3"){
+            videoList = videoList + Video.list().each{if(it.ofrecidoPor==text)
+				it
+			}            
+        }
+        if(opcion=="4"){
+            videoList = videoList + Video.list().each{if(it.lugar==text)
+				it
+			}            
+        }        
+        
+        if(videoList.getAt(0)!=null){
+            chain(action:"results", model:[videos: videoList])
+            
         }
         else{
-            redirect(action:"logged")
+            redirect(action:"home")
         }
     }
     
     def buscar={
-        def Video vid = Video.findByTitulo(params.search)
+        def videoList=[] as Set
+        def String opcion = (String)params.Opcion
+        if(opcion=="1"){
+           videoList = videoList + Video.list().each{if(it.titulo==params.search)
+			   it
+		   } 
+        }
+        if(opcion=="2"){
+            videoList = videoList + Video.list().each{if(it.titulo==params.search)
+				it
+			}            
+        }
+        if(opcion=="3"){
+            videoList = videoList + Video.list().each{if(it.ofrecidoPor==params.search)
+				it
+			}            
+        }
+        if(opcion=="4"){
+            videoList = videoList + Video.list().each{if(it.lugar==params.search)
+				it
+			}            
+        }        
         
-        if(vid){
-            videoBuscado = vid
-            redirect(action:"results")
+        if(videoList.getAt(0)!=null){
+            chain(action:"results", model:[videos: videoList])
             
         }
         else{
-            redirect(action:"checkLogged")
+            redirect(action:"home")
         }        
     }
     
     def results= {
-        [video: videoBuscado, rol: rolActual]
+        def videoList = chainModel["videos"]
+        [videos: videoList]
     }
         
         

@@ -8,10 +8,11 @@ class Rol {
 	def ClaseEvento claseEvento
 	
 	static belongsTo = [Usuario, ClaseEvento]
-    static constraints = {
-    }
 	
-	def String toString(){
-		"${this.rol}"
-	}
+        static constraints = {
+        }
+        
+        def String toString(){
+                "${this.rol}"
+        }
 }

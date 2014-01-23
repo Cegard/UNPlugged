@@ -8,7 +8,7 @@
 
 <body>
 <div class="logo">
-    <img src="${resource(dir: 'images', file: 'Logo.png')}" width="497" height="100" />
+    <img src="${resource(dir: 'images', file: 'logo.png')}" width="497" height="100" />
 	<div align="right">
 		<input name="search" type="search" autocomplete="on" value="buscar">
 	</div>

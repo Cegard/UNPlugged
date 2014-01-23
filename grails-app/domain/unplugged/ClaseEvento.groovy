@@ -3,8 +3,8 @@ package unplugged
 class ClaseEvento {
 	
 	def String nombre
-	def String tipo // solo se admitirán dos valores "clase" o "evento"
-    def String codigo
+        def String codigo
+        def String tipo // solo se admitirán dos valores "clase" o "evento"
 	
     static constraints = {
     }

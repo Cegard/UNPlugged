@@ -2,11 +2,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="layout" content="main"/> 
 <meta name="layout" content="layout1"/> 
 <title>Flash Media Live Encoder Guía de uso</title>
 </head>
 <body>
+    <div id="centro">
 <div id="screensteps-main-content">
 <div id="screensteps-document">
 <div id="screensteps-description">
@@ -129,6 +129,7 @@
 
 
 
+</div>
 </div>
 </div>
 </div>

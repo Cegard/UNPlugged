@@ -42,7 +42,8 @@ class UsuarioController {
 		}
 	}
 	
-	// esta clausura se encarga de establecer que opciones le permitirá escoger al usuario
+	
+	// esta clausura se encarga de establecer que opciones le permitirá dar a escoger al usuario
 	def preparar={
 		
 		if (session.actual == null)
@@ -51,15 +52,9 @@ class UsuarioController {
 		def roles = [] as Set // se escoge un set, ya que se acomoda y se facilita más su uso
 		
 		// se capturan los roles del usuario que ingreso en la página
-		
-		/*Rol.list().each{
-			
-			if (it.persona.id == session.actual.id)
-				roles.add(it)
-		}*/
-
-		flash.rolesActual = Rol.find{persona.id == session.actual.id}
-		redirect(url:"/video/procesar")
+		session.rolesActual = Rol.list().each{persona.id == session.actual.id}
+		session.rolesActual.each{println("${it.toString()}")}
+		redirect(url:"/video/gjfjhf")
 	}
 	
 }

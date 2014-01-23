@@ -2,11 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-<meta name="layout" content="main"/> 
 <meta name="layout" content="layout1"/> 
 <title>BigVEncoder Guía de uso</title>
 </head>
-<body>
+<body><div id="centro">
 <h1>BigVEncoder</h1>
 <br><br>
 <h2>Introducción</h2>
@@ -99,6 +98,6 @@ seleccionar high422 en el campo &quot;profile&quot;.
 <p/>
 <br><br>
 Siguiendo esta guía, la difusión de multimedia será satisfactoriamente realizada a su canal de UNPlugged.
-
+</div>
 </body>
 </html>

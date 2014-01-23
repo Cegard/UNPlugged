@@ -7,24 +7,6 @@
 
 </head>
 <body>
-
-    <div id="izquierda">
-    <div aling="left">
-               <p style="color: #FFF; font-size: 24px;"><strong>|| Bienvenido <%= "${rolActual} ${session.actual.toString()}" %> </strong></p>
-                <form name="LogOut" action="logout">
-                <br/>
-                <input type="submit" name="logOut" value="Log Out" />
-                </form>
-    </div>
-    
-    <div aling="left">
-               <p>&nbsp;</p>
-               <p style="font-size: 24px; font-weight: bolder;">|| Explorar</p>
-               <p><a href="#">Cursos</a></p>
-               <p><a href="#">Videos</a></p>
-               <p><a href="#">Canales</a></p>
-    </div>
-    </div>
         
     <div id="centro" align="center">
             <p>&nbsp;</p>
